@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Kalorienrechner
+namespace Kalorienrechner.UC.User
 {
     /// <summary>
-    /// Interaction logic for Login.xaml
+    /// Interaction logic for SetNewPasswordUserControl.xaml
     /// </summary>
-    public partial class Login : Window
+    public partial class SetNewPasswordUserControl : UserControl
     {
-        public Login()
+        public SetNewPasswordUserControl()
         {
             InitializeComponent();
         }

@@ -1,4 +1,4 @@
-﻿<Window x:Class="Kalorienrechner.MainWindow"
+﻿<Window x:Class="Kalorienrechner.EntranceWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,14 +6,14 @@
         xmlns:local="clr-namespace:Kalorienrechner"
         xmlns:UserUc="clr-namespace:Kalorienrechner.UC.User"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Login"
+        Height="170" Width="350" ResizeMode="NoResize">
     <TabControl>
-        <TabItem Header="Rezepte"></TabItem>
-        <TabItem Header="Zutaten">
-            
+        <TabItem Header="Login">
+            <UserUc:LoginUserControl/>
         </TabItem>
-        <TabItem Header="Mein Account">
-            <UserUc:SetNewPasswordUserControl/>
+        <TabItem Header="Registrieren">
+            <UserUc:RegisterUserControl/>
         </TabItem>
     </TabControl>
 </Window>
