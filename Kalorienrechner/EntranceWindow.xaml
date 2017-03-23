@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Kalorienrechner"
         xmlns:UserUc="clr-namespace:Kalorienrechner.UC.User"
         mc:Ignorable="d"
-        Title="Login"
+        Title="Willkommen"
         Height="170" Width="350" ResizeMode="NoResize">
     <TabControl>
         <TabItem Header="Login">

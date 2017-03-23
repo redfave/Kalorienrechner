@@ -61,6 +61,9 @@
     <Compile Include="UC\Food\RecipeUserControl.xaml.cs">
       <DependentUpon>RecipeUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UC\UIElements\SearchUserControl.xaml.cs">
+      <DependentUpon>SearchUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UC\User\LoginUserControl.xaml.cs">
       <DependentUpon>LoginUserControl.xaml</DependentUpon>
     </Compile>
@@ -94,6 +97,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UC\Food\RecipeUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UC\UIElements\SearchUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

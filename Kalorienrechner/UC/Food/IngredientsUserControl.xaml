@@ -4,15 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Kalorienrechner.UC.Food"
-             mc:Ignorable="d" 
+             xmlns:localUI="clr-namespace:Kalorienrechner.UC.UIElements"
+    mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="600">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.5*"/>
         </Grid.ColumnDefinitions>
-        <Grid  Grid.Column="1">
-            <ListView></ListView>
-        </Grid>
+        <localUI:SearchUserControl Grid.Column="1"></localUI:SearchUserControl>
     </Grid>
 </UserControl>
