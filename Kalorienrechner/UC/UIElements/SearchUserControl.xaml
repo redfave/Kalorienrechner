@@ -4,32 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Kalorienrechner.UC.UIElements"
-             mc:Ignorable="d" 
+             xmlns:xceed="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="300"
             >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <CheckBox Name="checkBoxFavorite" Content="Favoriten" VerticalAlignment="Center" Margin="0,0,15,0"></CheckBox>
-            <!--http://stackoverflow.com/a/21672408/5329332-->
-            <TextBox Name="textBoxSearch" VerticalAlignment="Center" HorizontalAlignment="Stretch" MinWidth="150">
-              
-            </TextBox>
-            <TextBlock IsHitTestVisible="False" Text="Suche" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" Foreground="DarkGray">
-                <TextBlock.Style>
-                    <Style TargetType="{x:Type TextBlock}">
-                        <Setter Property="Visibility" Value="Collapsed"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Text, ElementName=textBoxSearchIngredients}" Value="">
-                                <Setter Property="Visibility" Value="Visible"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style>
-            </TextBlock>
-        </StackPanel>
-        <!--<CollectionViewSource Grid.Row="1"></CollectionViewSource>-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <CheckBox Grid.Column="0" Name="checkBoxFavorite" Content="Favoriten" VerticalAlignment="Center" Margin="0,0,15,0"></CheckBox>
+        <xceed:WatermarkTextBox Grid.Column="1" Name="SearchWatermarkTextBox" VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                                    MinWidth="150" Watermark="Suche"></xceed:WatermarkTextBox>
+        <ListView  Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Stretch" Margin="0,10,0,0" MinHeight="250"></ListView>
     </Grid>
 </UserControl>
