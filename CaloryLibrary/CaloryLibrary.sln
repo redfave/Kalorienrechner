@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaloryLibrary", "CaloryLibrary\CaloryLibrary.csproj", "{98DD8B4C-6DFA-4718-B4AC-A3023D6E5870}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaloryConsole", "CaloryConsole\CaloryConsole.csproj", "{319F7262-4EC9-401A-81E1-A16B552F0211}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{98DD8B4C-6DFA-4718-B4AC-A3023D6E5870}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98DD8B4C-6DFA-4718-B4AC-A3023D6E5870}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98DD8B4C-6DFA-4718-B4AC-A3023D6E5870}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98DD8B4C-6DFA-4718-B4AC-A3023D6E5870}.Release|Any CPU.Build.0 = Release|Any CPU
+		{319F7262-4EC9-401A-81E1-A16B552F0211}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{319F7262-4EC9-401A-81E1-A16B552F0211}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{319F7262-4EC9-401A-81E1-A16B552F0211}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{319F7262-4EC9-401A-81E1-A16B552F0211}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

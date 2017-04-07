@@ -196,7 +196,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Source\Repos\CaloryCalculator\CaloryLibrary\CaloryLibrary\CaloryLibrary.csproj">
+    <Folder Include="ViewModel\UIElements\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CaloryLibrary\CaloryLibrary\CaloryLibrary.csproj">
       <Project>{98DD8B4C-6DFA-4718-B4AC-A3023D6E5870}</Project>
       <Name>CaloryLibrary</Name>
     </ProjectReference>

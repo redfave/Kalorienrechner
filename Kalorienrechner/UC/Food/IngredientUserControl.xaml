@@ -12,7 +12,9 @@
             <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="0.5*"/>
         </Grid.ColumnDefinitions>
-        <localUI:SearchUserControl Grid.Column="0"></localUI:SearchUserControl>
+        <localUI:SearchUserControl Grid.Column="0">
+            <localUI:SearchUserControl.C
+        </localUI:SearchUserControl>
         <Grid Grid.Column="1">
             
         </Grid>
