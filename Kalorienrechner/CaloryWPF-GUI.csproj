@@ -123,6 +123,7 @@
       <DependentUpon>SetNewPasswordUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\Food\IngredientViewModel.cs" />
+    <Compile Include="ViewModel\UIElements\SearchViewModel.cs" />
     <Page Include="EntranceWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -195,9 +196,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModel\UIElements\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\CaloryLibrary\CaloryLibrary\CaloryLibrary.csproj">
       <Project>{98DD8B4C-6DFA-4718-B4AC-A3023D6E5870}</Project>
