@@ -10,6 +10,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaloryWPF-GUI", "Kalorienre
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaloryLibrary", "CaloryLibrary\CaloryLibrary\CaloryLibrary.csproj", "{98DD8B4C-6DFA-4718-B4AC-A3023D6E5870}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaloryConsole", "CaloryLibrary\CaloryConsole\CaloryConsole.csproj", "{319F7262-4EC9-401A-81E1-A16B552F0211}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaloryForms", "CaloryLibrary\CaloryForms\CaloryForms.csproj", "{6F13B8C6-3252-4CBE-A460-2817053F6279}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaloryTest", "CaloryLibrary\CaloryTest\CaloryTest.csproj", "{75FC7EAF-4618-49F0-9205-2C298A381E3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +30,18 @@ Global
 		{98DD8B4C-6DFA-4718-B4AC-A3023D6E5870}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98DD8B4C-6DFA-4718-B4AC-A3023D6E5870}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98DD8B4C-6DFA-4718-B4AC-A3023D6E5870}.Release|Any CPU.Build.0 = Release|Any CPU
+		{319F7262-4EC9-401A-81E1-A16B552F0211}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{319F7262-4EC9-401A-81E1-A16B552F0211}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{319F7262-4EC9-401A-81E1-A16B552F0211}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{319F7262-4EC9-401A-81E1-A16B552F0211}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F13B8C6-3252-4CBE-A460-2817053F6279}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F13B8C6-3252-4CBE-A460-2817053F6279}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F13B8C6-3252-4CBE-A460-2817053F6279}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F13B8C6-3252-4CBE-A460-2817053F6279}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75FC7EAF-4618-49F0-9205-2C298A381E3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75FC7EAF-4618-49F0-9205-2C298A381E3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75FC7EAF-4618-49F0-9205-2C298A381E3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75FC7EAF-4618-49F0-9205-2C298A381E3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
