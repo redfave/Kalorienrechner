@@ -9,12 +9,13 @@
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="300">
     <UserControl.Resources>
-        <CollectionViewSource x:Key="CollectionSource"></CollectionViewSource>
+        <CollectionViewSource x:Key="CollectionSource"
+                              Source="{Binding Path=ResultCollection}"></CollectionViewSource>
     </UserControl.Resources>
-    <Grid>
-        <Grid.DataContext>
+    <Grid Name="LayoutGrid">
+        <!--<Grid.DataContext>
             <viewModel:SearchViewModel></viewModel:SearchViewModel>
-        </Grid.DataContext>
+        </Grid.DataContext>-->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -23,9 +24,11 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <CheckBox Grid.Column="0" Name="checkBoxFavorite" Content="Favoriten" VerticalAlignment="Center" Margin="0,0,15,0"></CheckBox>
-        <xceed:WatermarkTextBox Grid.Column="1" Name="SearchWatermarkTextBox" VerticalAlignment="Center" HorizontalAlignment="Stretch"
-                                    MinWidth="150" Watermark="Suche"></xceed:WatermarkTextBox>
+        <CheckBox Grid.Column="0" Name="checkBoxFavorite" Content="Favoriten" VerticalAlignment="Center" Margin="0,5,15,0"
+                  IsChecked="{Binding Path=ShowOnlyFavorites}"></CheckBox>
+        <xceed:WatermarkTextBox Grid.Column="1" Name="SearchWatermarkTextBox"
+                                VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,0,0"
+                                    MinWidth="150" Watermark="Suche" Text="{Binding Path=SearchString}"></xceed:WatermarkTextBox>
         <ListView  Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Stretch" Margin="0,10,0,0" MinHeight="250"
                    ItemsSource="{Binding Source={StaticResource CollectionSource}}">
         </ListView>

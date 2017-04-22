@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kalorienrechner.ViewModel.UIElements;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,8 @@ namespace Kalorienrechner.UC.UIElements
         public SearchUserControl()
         {
             InitializeComponent();
+            SearchViewModel<> searchViewModelInstance = new SearchViewModel<>();
+            LayoutGrid.DataContext = SearchViewModel;
         }
     }
 }
