@@ -1,36 +1,45 @@
 ﻿<UserControl x:Class="Kalorienrechner.UC.UIElements.SearchUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Kalorienrechner.UC.UIElements"
-             xmlns:xceed="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModel="clr-namespace:Kalorienrechner.ViewModel.UIElements"
-             mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="300">
+             xmlns:xceed="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+             d:DesignHeight="600"
+             d:DesignWidth="300"
+             mc:Ignorable="d">
     <UserControl.Resources>
-        <CollectionViewSource x:Key="CollectionSource"
-                              Source="{Binding Path=ResultCollection}"></CollectionViewSource>
+        <CollectionViewSource x:Key="CollectionSource" Source="{Binding Path=ResultCollection}" />
     </UserControl.Resources>
     <Grid Name="LayoutGrid">
-        <!--<Grid.DataContext>
-            <viewModel:SearchViewModel></viewModel:SearchViewModel>
-        </Grid.DataContext>-->
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <CheckBox Grid.Column="0" Name="checkBoxFavorite" Content="Favoriten" VerticalAlignment="Center" Margin="0,5,15,0"
-                  IsChecked="{Binding Path=ShowOnlyFavorites}"></CheckBox>
-        <xceed:WatermarkTextBox Grid.Column="1" Name="SearchWatermarkTextBox"
-                                VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,0,0"
-                                    MinWidth="150" Watermark="Suche" Text="{Binding Path=SearchString}"></xceed:WatermarkTextBox>
-        <ListView  Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Stretch" Margin="0,10,0,0" MinHeight="250"
-                   ItemsSource="{Binding Source={StaticResource CollectionSource}}">
-        </ListView>
+        <CheckBox Name="checkBoxFavorite"
+                  Grid.Column="0"
+                  Margin="0,5,15,0"
+                  VerticalAlignment="Center"
+                  Content="Favoriten"
+                  IsChecked="{Binding Path=ShowOnlyFavorites}" />
+        <xceed:WatermarkTextBox Name="SearchWatermarkTextBox"
+                                Grid.Column="1"
+                                MinWidth="150"
+                                Margin="0,5,0,0"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Center"
+                                Text="{Binding Path=SearchString}"
+                                Watermark="Suche" />
+        <ListView Grid.Row="1"
+                  Grid.ColumnSpan="2"
+                  MinHeight="250"
+                  Margin="0,10,0,0"
+                  VerticalAlignment="Stretch"
+                  ItemsSource="{Binding Source={StaticResource CollectionSource}}" />
     </Grid>
 </UserControl>

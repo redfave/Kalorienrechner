@@ -30,9 +30,14 @@ namespace Kalorienrechner.UC.UIElements
             InitializeComponent();
             //SearchViewModel<Type> searchViewModelInstance = new SearchViewModel<Type>();
             //LayoutGrid.DataContext = searchViewModelInstance;
-            Type genericContainer = typeof(SearchViewModel<>);
-            Type genericType = genericContainer.MakeGenericType(typeof(this.QueryType));
-            LayoutGrid.DataContext = Activator.CreateInstance();
+
+            //Type genericContainer = typeof(SearchViewModel<>);
+            //Type genericType = genericContainer.MakeGenericType(typeof(this.QueryType));
+            //LayoutGrid.DataContext = Activator.CreateInstance();
+
+            Type searchViewModelType = typeof(SearchViewModel<>).MakeGenericType(new[] { QueryType });
+            LayoutGrid.DataContext = Activator.CreateInstance(searchViewModelType);
+
         }
 
         public Type QueryType
