@@ -21,29 +21,22 @@ namespace Kalorienrechner.UC.UIElements
     /// </summary>
     public partial class SearchUserControl : UserControl
     {
-        private static readonly DependencyProperty QueryTypeProperty =
-            DependencyProperty.Register("QueryType", typeof(Type), typeof(SearchUserControl), new PropertyMetadata(""));
+        private static readonly DependencyProperty QueriedTypeProperty =
+            DependencyProperty.Register("QueriedType", typeof(Type), typeof(SearchUserControl), new PropertyMetadata(""));
 
 
         public SearchUserControl()
         {
             InitializeComponent();
-            //SearchViewModel<Type> searchViewModelInstance = new SearchViewModel<Type>();
-            //LayoutGrid.DataContext = searchViewModelInstance;
-
-            //Type genericContainer = typeof(SearchViewModel<>);
-            //Type genericType = genericContainer.MakeGenericType(typeof(this.QueryType));
-            //LayoutGrid.DataContext = Activator.CreateInstance();
-
-            Type searchViewModelType = typeof(SearchViewModel<>).MakeGenericType(new[] { QueryType });
+            Type searchViewModelType = typeof(SearchViewModel<>).MakeGenericType(new[] { QueriedType });
             LayoutGrid.DataContext = Activator.CreateInstance(searchViewModelType);
 
         }
 
-        public Type QueryType
+        public Type QueriedType
         {
-            get { return GetValue(QueryTypeProperty) as Type; }
-            set { SetValue(QueryTypeProperty, value); }
+            get { return GetValue(QueriedTypeProperty) as Type; }
+            set { SetValue(QueriedTypeProperty, value); }
         }
     }
 }
