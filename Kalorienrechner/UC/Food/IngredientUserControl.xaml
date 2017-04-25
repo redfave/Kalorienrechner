@@ -5,18 +5,19 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Kalorienrechner.UC.Food"
              xmlns:localUI="clr-namespace:Kalorienrechner.UC.UIElements"
-             xmlns:viewModel="clr-namespace:Kalorienrechner.ViewModel.UIElements"
+             xmlns:viewModel="clr-namespace:Kalorienrechner.ViewModel.Food"
     mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="600">
     <UserControl.DataContext>
-        <viewModel:SearchViewModel/>
+        <viewModel:IngredientViewModel/>
     </UserControl.DataContext>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="0.5*"/>
         </Grid.ColumnDefinitions>
-        <localUI:SearchUserControl Grid.Column="0">
+        <localUI:SearchUserControl Grid.Column="0" QueriedType="{Binding Path=RequestType}">
           
         </localUI:SearchUserControl>
         <Grid Grid.Column="1">

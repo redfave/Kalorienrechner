@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CaloryLibrary.Models;
+using Kalorienrechner.ViewModel.Food;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

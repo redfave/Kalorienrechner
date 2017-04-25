@@ -21,8 +21,8 @@ namespace Kalorienrechner.UC.UIElements
     /// </summary>
     public partial class SearchUserControl : UserControl
     {
-        private static readonly DependencyProperty QueriedTypeProperty =
-            DependencyProperty.Register("QueriedType", typeof(Type), typeof(SearchUserControl), new PropertyMetadata(""));
+        public static readonly DependencyProperty QueriedTypeProperty =
+            DependencyProperty.Register("QueriedType", typeof(Type), typeof(SearchUserControl), new PropertyMetadata(string.Empty));
 
 
         public SearchUserControl()

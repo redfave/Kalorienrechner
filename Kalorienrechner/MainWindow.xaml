@@ -1,19 +1,22 @@
 ﻿<Window x:Class="Kalorienrechner.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Kalorienrechner"
         xmlns:UserUc="clr-namespace:Kalorienrechner.UC.User"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:food="clr-namespace:Kalorienrechner.UC.Food"
+        xmlns:local="clr-namespace:Kalorienrechner"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="MainWindow"
+        Width="525"
+        Height="350"
+        mc:Ignorable="d">
     <TabControl>
-        <TabItem Header="Rezepte"></TabItem>
-        <TabItem Header="Zutaten">
-            
+        <TabItem Header="Rezepte">
+            <food:IngredientUserControl />
         </TabItem>
+        <TabItem Header="Zutaten" />
         <TabItem Header="Mein Account">
-            <UserUc:SetNewPasswordUserControl/>
+            <UserUc:SetNewPasswordUserControl />
         </TabItem>
     </TabControl>
 </Window>

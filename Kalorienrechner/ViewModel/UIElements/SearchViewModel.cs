@@ -1,4 +1,5 @@
-﻿using CaloryLibrary.Repository;
+﻿using CaloryLibrary.Models;
+using CaloryLibrary.Repository;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,12 @@ namespace Kalorienrechner.ViewModel.UIElements
 
         public SearchViewModel()
         {
-            //_entityContext.Get();
+            SearchType = typeof(T);
+      
+         typeof(CaloryRepository).GetMethod("GetAll").MakeGenericMethod(SearchType).Invoke(_entityContext, null);
+           
+            
+
         }
         public bool ShowOnlyFavorites
         {

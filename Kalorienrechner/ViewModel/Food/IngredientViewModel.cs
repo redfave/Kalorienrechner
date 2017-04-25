@@ -19,6 +19,12 @@ namespace Kalorienrechner.ViewModel.Food
         private double _fat;
         private double _carbs;
         private ObservableCollection<Unit> _units;
+        private Type _requestType;
+
+        public IngredientViewModel()
+        {
+            RequestType = typeof(Ingredient);
+        }
 
         public string Name
         {
@@ -93,7 +99,7 @@ namespace Kalorienrechner.ViewModel.Food
                 return _units;
             }
 
-        private    set
+            private set
             {
                 _units = value;
             }
@@ -106,10 +112,23 @@ namespace Kalorienrechner.ViewModel.Food
                 return _ID;
             }
 
-          private  set
+            private set
             {
                 _ID = value;
                 SetProperty(ref _ID, value);
+            }
+        }
+
+        public Type RequestType
+        {
+            get
+            {
+                return _requestType;
+            }
+
+         private set
+            {
+                SetProperty(ref _requestType, value);
             }
         }
     }
