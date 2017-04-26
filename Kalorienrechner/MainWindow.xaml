@@ -12,9 +12,10 @@
         mc:Ignorable="d">
     <TabControl>
         <TabItem Header="Rezepte">
+        </TabItem>
+        <TabItem Header="Zutaten">
             <food:IngredientUserControl />
         </TabItem>
-        <TabItem Header="Zutaten" />
         <TabItem Header="Mein Account">
             <UserUc:SetNewPasswordUserControl />
         </TabItem>
