@@ -34,20 +34,13 @@ namespace Kalorienrechner.UC.UIElements
         public Type QueriedType
         {
             get { return GetValue(QueriedTypeProperty) as Type; }
-            set
-            {
-                SetValue(QueriedTypeProperty, value);
-                SetDataContext();
-            }
+            set { SetValue(QueriedTypeProperty, value); }
         }
 
-        private void SetDataContext()
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            if (QueriedType != null)
-            {
-                Type searchViewModelType = typeof(SearchViewModel<>).MakeGenericType(new[] { QueriedType });
-                LayoutGrid.DataContext = Activator.CreateInstance(searchViewModelType);
-            }
+            Type searchViewModelType = typeof(SearchViewModel<>).MakeGenericType(new[] { QueriedType });
+            LayoutGrid.DataContext = Activator.CreateInstance(searchViewModelType);
         }
     }
 }
