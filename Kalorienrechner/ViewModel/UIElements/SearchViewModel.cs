@@ -49,10 +49,10 @@ namespace Kalorienrechner.ViewModel.UIElements
             {
                 _searchString = value;
                 SetProperty(ref _searchString, value);
-                ResultCollection.Filter = f =>
+                ResultCollection.Filter = filter =>
                 {
-                    Ingredient i = f as Ingredient;
-                    return i.Name.Contains(value);
+                    Ingredient ingredient = filter as Ingredient;
+                    return ingredient.Name.StartsWith(value, StringComparison.CurrentCultureIgnoreCase);
                 };
             }
         }
