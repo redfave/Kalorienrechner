@@ -16,6 +16,7 @@ namespace CaloryLibrary.Models
         public double Carbs { private get; set; }
         public virtual List<Unit> Units { get; set; }
 
+
         public double GetCalories(Unit unit)
         {
             return Calories * unit.Multiplier;
@@ -34,6 +35,6 @@ namespace CaloryLibrary.Models
         public double GetCarbs(Unit unit)
         {
             return Carbs * unit.Multiplier;
-        }
+        }       
     }
 }

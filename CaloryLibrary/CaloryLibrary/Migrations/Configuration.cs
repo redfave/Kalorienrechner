@@ -6,6 +6,9 @@
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using System.Security.Cryptography;
+    using System.Text;
+    using CaloryLibrary;
 
     internal sealed class Configuration : DbMigrationsConfiguration<CaloryLibrary.DAL.CaloryContext>
     {
@@ -21,7 +24,7 @@
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
             //
-            Unit[] unitsToAdd = new []
+            Unit[] unitsToAdd = new[]
             {
                 new Unit
                 {
@@ -75,7 +78,24 @@
                   Units = unitsToAdd.ToList()
               }
             );
-
+            context.SaveChanges();
+            using (var md5 = MD5.Create())
+            {
+                context.Logins.AddOrUpdate(
+                p => p.LoginId,
+                new Login
+                {
+                    Name = "MTsu",
+                    Password = Helper.CalculateMD5Hash("abc123"),
+                },
+                new Login
+                {
+                    Name = "OFalkunskyy",
+                    Password = Helper.CalculateMD5Hash("blyat"),
+                }
+                );
+            }
+            
         }
     }
 }
