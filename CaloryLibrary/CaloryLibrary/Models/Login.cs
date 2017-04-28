@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace CaloryLibrary.Models
 {
-    public class Recipe
+    public class Login
     {
-        public int RecipeId { get; set; }
+        public int LoginId { get; set; }
         public string Name { get; set; }
+        public string Password { get; set; }
 
-        public virtual Login Creator { get; set; }
+        public virtual List<Recipe> Recipes { get; set; }
     }
 }
