@@ -10,9 +10,6 @@
              d:DesignWidth="300"
              Loaded="UserControl_Loaded"
              mc:Ignorable="d">
-    <UserControl.Resources>
-        <CollectionViewSource x:Key="CollectionSource" Source="{Binding Path=ResultCollection}" />
-    </UserControl.Resources>
     <Grid Name="LayoutGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -41,6 +38,6 @@
                   MinHeight="250"
                   Margin="0,10,0,5"
                   VerticalAlignment="Stretch"
-                  ItemsSource="{Binding Source={StaticResource CollectionSource}}" />
+                  ItemsSource="{Binding Path=ResultCollection}" DisplayMemberPath="Name"/>
     </Grid>
 </UserControl>
