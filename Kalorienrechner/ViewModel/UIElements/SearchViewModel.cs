@@ -1,11 +1,14 @@
-﻿using CaloryLibrary.Repository;
+﻿using CaloryLibrary.Models;
+using CaloryLibrary.Repository;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace Kalorienrechner.ViewModel.UIElements
 {
@@ -14,12 +17,11 @@ namespace Kalorienrechner.ViewModel.UIElements
         private CaloryRepository _entityContext = new CaloryRepository();
         private bool _showOnlyFavorites;
         private string _searchString;
-        private ObservableCollection<T> _resultCollection = new ObservableCollection<T>();
+        private ICollectionView _resultCollection;
 
         public SearchViewModel()
         {
-            List<T> list = _entityContext.GetAll<T>().ToList();
-            ResultCollection.AddRange(list);             
+            ResultCollection = CollectionViewSource.GetDefaultView(_entityContext.GetAll<T>());
         }
 
         public bool ShowOnlyFavorites
@@ -47,17 +49,21 @@ namespace Kalorienrechner.ViewModel.UIElements
             {
                 _searchString = value;
                 SetProperty(ref _searchString, value);
-
+                ResultCollection.Filter = f =>
+                {
+                    Ingredient i = f as Ingredient;
+                    return i.Name.Contains(value);
+                };
             }
         }
 
-        public ObservableCollection<T> ResultCollection
+        public ICollectionView ResultCollection
         {
             get
             {
                 return _resultCollection;
             }
-            set
+            private set
             {
                 _resultCollection = value;
                 SetProperty(ref _resultCollection, value);
