@@ -104,6 +104,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Global.cs" />
     <Compile Include="UC\Food\IngredientUserControl.xaml.cs">
       <DependentUpon>IngredientUserControl.xaml</DependentUpon>
     </Compile>
@@ -124,6 +125,7 @@
     </Compile>
     <Compile Include="ViewModel\Food\IngredientViewModel.cs" />
     <Compile Include="ViewModel\UIElements\SearchViewModel.cs" />
+    <Compile Include="ViewModel\User\LoginViewModel.cs" />
     <Page Include="EntranceWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
