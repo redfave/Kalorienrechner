@@ -125,7 +125,7 @@
     </Compile>
     <Compile Include="ViewModel\Food\IngredientViewModel.cs" />
     <Compile Include="ViewModel\UIElements\SearchViewModel.cs" />
-    <Compile Include="ViewModel\User\LoginViewModel.cs" />
+    
     <Page Include="EntranceWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
