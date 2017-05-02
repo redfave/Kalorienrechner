@@ -4,6 +4,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Kalorienrechner.UC.User"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
              d:DesignHeight="300"
              d:DesignWidth="300"
              mc:Ignorable="d">
@@ -34,8 +36,14 @@
         <TextBox Grid.Row="1" Grid.Column="4" Width="200"
                  Text="{Binding Path=UserName, UpdateSourceTrigger=PropertyChanged}" />
         <TextBlock Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Text="Passwort:" />
-        <TextBox Grid.Row="3" Grid.Column="4"  Width="200"
-                 Text="{Binding Path=UserPassword, UpdateSourceTrigger=PropertyChanged}" />
-        <Button Grid.Row="7" Grid.Column="4" Command="{Binding Path=LoginCommand}" Content="Login" />
+        <PasswordBox Grid.Row="3" Grid.Column="4" Name="passwordBox" Width="200">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PasswordChanged">
+                    <ei:CallMethodAction MethodName="RaiseLoginCommandCanExecuteChanged" TargetObject="{Binding}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </PasswordBox>
+        <Button Grid.Row="7" Grid.Column="4" Content="Login" Command="{Binding Path=LoginCommand}"
+                CommandParameter="{Binding ElementName=passwordBox}" />
     </Grid>
 </UserControl>

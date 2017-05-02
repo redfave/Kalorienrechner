@@ -5,23 +5,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
+using CaloryLibrary;
+using CaloryLibrary.Repository;
+using CaloryLibrary.Models;
+using System.Windows.Controls;
 
 namespace Kalorienrechner.ViewModel.User
 {
     public class LoginViewModel : BindableBase
     {
-
-        private DelegateCommand _loginCommand;
+        private DelegateCommand<PasswordBox> _loginCommand;
         private string _userName;
-        private string _userPassword;
+        private MD5 md5;
+        private CaloryRepository repo = new CaloryRepository();
 
         public LoginViewModel()
         {
-            LoginCommand = new DelegateCommand(ExecuteLogin, CanLogin);
+            LoginCommand = new DelegateCommand<PasswordBox>(ExecuteLogin, CanLogin);
+            md5 = MD5.Create();
         }
 
-
-        public DelegateCommand LoginCommand
+        public DelegateCommand<PasswordBox> LoginCommand
         {
             get
             {
@@ -31,7 +36,6 @@ namespace Kalorienrechner.ViewModel.User
             private set
             {
                 _loginCommand = value;
-                SetProperty(ref _loginCommand, value);
             }
         }
 
@@ -46,36 +50,44 @@ namespace Kalorienrechner.ViewModel.User
             {
                 _userName = value;
                 SetProperty(ref _userName, value);
-
+                RaiseLoginCommandCanExecuteChanged();
             }
         }
 
-        public string UserPassword
+        private bool CanLogin(PasswordBox parameter)
         {
-            get
+            if (parameter == null)
             {
-                return _userPassword;
+                throw new ArgumentNullException();
             }
-
-            set
-            {
-                _userPassword = value;
-                SetProperty(ref _userPassword, value);
-            }
-        }
-
-        private bool CanLogin()
-        {
-            if (UserName != null && UserName.Count() > 0 && UserPassword != null && UserPassword.Count() > 0)
+            if (UserName != null && UserName.Count() > 0 && parameter.Password != null && parameter.Password.Count() > 0)
             {
                 return true;
             }
-            else { return false; }
+            else
+            {
+                return false;
+            };
         }
 
-        private void ExecuteLogin()
+        private void ExecuteLogin(PasswordBox parameter)
         {
-            //TODO
+            if (parameter == null)
+            {
+                throw new ArgumentNullException();
+            }
+            string hashedPassword = Helper.CalculateMD5Hash(parameter.Password);
+            Login login = repo.GetOne<Login>(l => l.Name == UserName && l.Password == hashedPassword);
+            if (login != null)
+            {
+                Global.CurrentUser = UserName;
+                //TODO
+            }
+        }
+
+        public void RaiseLoginCommandCanExecuteChanged()
+        {
+            LoginCommand.RaiseCanExecuteChanged();
         }
 
     }
