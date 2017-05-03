@@ -9,6 +9,7 @@ using System.Security.Cryptography;
 using CaloryLibrary.Repository;
 using CaloryLibrary.Models;
 using System.Windows.Controls;
+using System.Windows;
 
 namespace Kalorienrechner.ViewModel.User
 {
@@ -93,8 +94,8 @@ namespace Kalorienrechner.ViewModel.User
             {
                 DisplayWrongCredentialsError = false;
                 Global.CurrentUser = UserName;
-                //TODO
                 MainWindow mainwindow = new MainWindow();
+                Application.Current.MainWindow.Close();
                 mainwindow.Show();
             }
             else
