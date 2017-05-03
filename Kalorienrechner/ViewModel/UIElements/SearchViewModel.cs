@@ -33,7 +33,6 @@ namespace Kalorienrechner.ViewModel.UIElements
 
             set
             {
-                _showOnlyFavorites = value;
                 SetProperty(ref _showOnlyFavorites, value);
             }
         }
@@ -47,7 +46,6 @@ namespace Kalorienrechner.ViewModel.UIElements
 
             set
             {
-                _searchString = value;
                 SetProperty(ref _searchString, value);
                 ResultCollection.Filter = filter =>
                 {
@@ -65,7 +63,6 @@ namespace Kalorienrechner.ViewModel.UIElements
             }
             private set
             {
-                _resultCollection = value;
                 SetProperty(ref _resultCollection, value);
             }
         }

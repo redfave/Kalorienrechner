@@ -95,7 +95,7 @@ namespace Kalorienrechner.ViewModel.Food
 
             private set
             {
-                _units = value;
+                SetProperty(ref _units, value);
             }
         }
 
@@ -108,7 +108,6 @@ namespace Kalorienrechner.ViewModel.Food
 
             private set
             {
-                _ID = value;
                 SetProperty(ref _ID, value);
             }
         }
