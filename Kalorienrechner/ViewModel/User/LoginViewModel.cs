@@ -45,7 +45,6 @@ namespace Kalorienrechner.ViewModel.User
             {
                 return _userName;
             }
-
             set
             {
                 SetProperty(ref _userName, value);
@@ -95,6 +94,8 @@ namespace Kalorienrechner.ViewModel.User
                 DisplayWrongCredentialsError = false;
                 Global.CurrentUser = UserName;
                 //TODO
+                MainWindow mainwindow = new MainWindow();
+                mainwindow.Show();
             }
             else
             {
