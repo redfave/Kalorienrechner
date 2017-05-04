@@ -82,7 +82,7 @@
             using (var md5 = MD5.Create())
             {
                 context.Logins.AddOrUpdate(
-                p => p.LoginId,
+                p => p.Name,
                 new Login
                 {
                     Name = "MTsu",
