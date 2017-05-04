@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:Kalorienrechner"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         Title="Kalorienrechner"
-        Width="525"
+        MinWidth="600"
         Height="350"
         mc:Ignorable="d">
     <TabControl>
