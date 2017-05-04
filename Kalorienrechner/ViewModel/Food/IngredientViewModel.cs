@@ -1,5 +1,6 @@
 ﻿
 using CaloryLibrary.Models;
+using CaloryLibrary.Repository;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -12,13 +13,20 @@ namespace Kalorienrechner.ViewModel.Food
 {
     public class IngredientViewModel : BindableBase
     {
+        private CaloryRepository entityContext = new CaloryRepository();
         private int _ID;
         private string _name;
         private double _calories;
         private double _protein;
         private double _fat;
         private double _carbs;
-        private ObservableCollection<Unit> _units;
+        private Unit _ingredientUnit;
+        private List<Unit> _unitList;
+
+        public IngredientViewModel ()
+        {
+            UnitList = entityContext.GetAll<Unit>().ToList();
+        }
 
         public string Name
         {
@@ -86,16 +94,16 @@ namespace Kalorienrechner.ViewModel.Food
             }
         }
 
-        public ObservableCollection<Unit> Units
+        public List<Unit> UnitList
         {
             get
             {
-                return _units;
+                return _unitList;
             }
 
             private set
             {
-                SetProperty(ref _units, value);
+                SetProperty(ref _unitList, value);
             }
         }
 
@@ -109,6 +117,19 @@ namespace Kalorienrechner.ViewModel.Food
             private set
             {
                 SetProperty(ref _ID, value);
+            }
+        }
+
+        public Unit IngredientUnit
+        {
+            get
+            {
+                return _ingredientUnit;
+            }
+
+            set
+            {
+                SetProperty(ref _ingredientUnit, value);
             }
         }
     }

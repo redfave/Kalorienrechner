@@ -25,6 +25,10 @@ namespace Kalorienrechner.UC.UIElements
             DependencyProperty.Register("QueriedType", typeof(Type), typeof(SearchUserControl),
                 new UIPropertyMetadata(null));
 
+        public static readonly DependencyProperty SelectedItemProperty =
+            DependencyProperty.Register("SelectedItem", typeof(object), typeof(SearchUserControl),
+                new UIPropertyMetadata(null));
+
 
         public SearchUserControl()
         {
@@ -33,8 +37,26 @@ namespace Kalorienrechner.UC.UIElements
 
         public Type QueriedType
         {
-            get { return GetValue(QueriedTypeProperty) as Type; }
-            set { SetValue(QueriedTypeProperty, value); }
+            get
+            {
+                return GetValue(QueriedTypeProperty) as Type;
+            }
+            set
+            {
+                SetValue(QueriedTypeProperty, value);
+            }
+        }
+
+        public object SelectedItem
+        {
+            get
+            {
+                return GetValue(SelectedItemProperty) as object;
+            }
+            private set
+            {
+                SetValue(SelectedItemProperty, value);
+            }
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

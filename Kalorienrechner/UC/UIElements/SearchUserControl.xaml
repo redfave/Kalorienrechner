@@ -38,6 +38,7 @@
                   MinHeight="250"
                   Margin="0,10,0,5"
                   VerticalAlignment="Stretch"
-                  ItemsSource="{Binding Path=ResultCollection}" DisplayMemberPath="Name"/>
+                  ItemsSource="{Binding Path=ResultCollection}" DisplayMemberPath="Name"
+                  SelectedItem="{Binding Path=SelectedItem}" SelectedValuePath="IngredientId"/>
     </Grid>
 </UserControl>

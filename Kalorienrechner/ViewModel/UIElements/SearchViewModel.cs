@@ -18,6 +18,7 @@ namespace Kalorienrechner.ViewModel.UIElements
         private bool _showOnlyFavorites;
         private string _searchString;
         private ICollectionView _resultCollection;
+        private T _selectedItem;
 
         public SearchViewModel()
         {
@@ -64,6 +65,19 @@ namespace Kalorienrechner.ViewModel.UIElements
             private set
             {
                 SetProperty(ref _resultCollection, value);
+            }
+        }
+
+        public T SelectedItem
+        {
+            get
+            {
+                return _selectedItem;
+            }
+
+            set
+            {
+                SetProperty(ref _selectedItem, value);
             }
         }
     }
