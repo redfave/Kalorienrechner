@@ -7,6 +7,7 @@
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:local="clr-namespace:Kalorienrechner.UC.User"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:extended="http://schemas.xceed.com/wpf/xaml/toolkit"
              d:DesignHeight="300"
              d:DesignWidth="300"
              mc:Ignorable="d">
@@ -18,51 +19,52 @@
     <!--<UserControl.InputBindings>
         <KeyBinding Command="{Binding Path=LoginCommand}" Key="Enter"></KeyBinding>
     </UserControl.InputBindings>-->
-
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0.4*" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="0.05*" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="0.05*" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="0.4*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.2*" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="0.1*" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="0.2*" />
-        </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="1"
+    
+    <extended:BusyIndicator IsBusy="{Binding Path=IsBusy, UpdateSourceTrigger=PropertyChanged}" BusyContent="Überprüfe Nutzerdaten">
+        <Grid FocusManager.FocusedElement="{Binding ElementName=textBoxLogin}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.4*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="0.05*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="0.05*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="0.4*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.2*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="0.2*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="1"
                    Grid.Column="1"
                    Grid.ColumnSpan="2"
                    Text="User:" />
-        <TextBox Grid.Row="1"
+            <TextBox Name="textBoxLogin" Grid.Row="1"
                  Grid.Column="4"
                  Width="200"
                  Text="{Binding Path=UserName,
-                                UpdateSourceTrigger=PropertyChanged}" />
-        <TextBlock Grid.Row="3"
+                                UpdateSourceTrigger=PropertyChanged}"  />
+            <TextBlock Grid.Row="3"
                    Grid.Column="1"
                    Grid.ColumnSpan="2"
                    Text="Passwort:" />
-        <PasswordBox Name="passwordBox"
+            <PasswordBox Name="passwordBox"
                      Grid.Row="3"
                      Grid.Column="4"
                      Width="200">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="PasswordChanged">
-                    <ei:CallMethodAction MethodName="RaiseLoginCommandCanExecuteChanged" TargetObject="{Binding}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </PasswordBox>
-        <TextBlock Grid.Row="6"
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PasswordChanged">
+                        <ei:CallMethodAction MethodName="RaiseLoginCommandCanExecuteChanged" TargetObject="{Binding}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </PasswordBox>
+            <TextBlock Grid.Row="6"
                    Grid.Column="4"
                    Margin="5,0,0,5"
                    Foreground="Red"
@@ -70,10 +72,11 @@
                    Visibility="{Binding Path=DisplayWrongCredentialsError,
                                         Converter={StaticResource boolToVisibilityConverter},
                                         UpdateSourceTrigger=PropertyChanged}" />
-        <Button Grid.Row="7"
+            <Button Grid.Row="7"
                 Grid.Column="4"
                 Command="{Binding Path=LoginCommand}"
                 CommandParameter="{Binding ElementName=passwordBox}"
                 Content="Login" />
-    </Grid>
-</UserControl>
+        </Grid>
+    </extended:BusyIndicator>
+    </UserControl>

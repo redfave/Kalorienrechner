@@ -18,6 +18,7 @@ namespace Kalorienrechner.ViewModel.User
         private DelegateCommand<PasswordBox> _loginCommand;
         private string _userName;
         private bool _displayWrongCredentialsError;
+        private bool _isBusy;
         private MD5 md5;
         private CaloryRepository repo = new CaloryRepository();
 
@@ -66,6 +67,19 @@ namespace Kalorienrechner.ViewModel.User
             }
         }
 
+        public bool IsBusy
+        {
+            get
+            {
+                return _isBusy;
+            }
+
+            set
+            {
+                SetProperty(ref _isBusy, value);
+            }
+        }
+
         private bool CanLogin(PasswordBox parameter)
         {
             if (parameter == null)
@@ -88,6 +102,7 @@ namespace Kalorienrechner.ViewModel.User
             {
                 throw new ArgumentNullException();
             }
+            IsBusy = true;
             string hashedPassword = CaloryLibrary.Helper.CalculateMD5Hash(parameter.Password);
             Login login = repo.GetOne<Login>(l => l.Name == UserName && l.Password == hashedPassword);
             if (login != null)
@@ -102,6 +117,7 @@ namespace Kalorienrechner.ViewModel.User
             {
                 DisplayWrongCredentialsError = true;
             }
+            IsBusy = false;
         }
 
         public void RaiseLoginCommandCanExecuteChanged()
