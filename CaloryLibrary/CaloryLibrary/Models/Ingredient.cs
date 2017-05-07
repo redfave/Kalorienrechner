@@ -14,9 +14,7 @@ namespace CaloryLibrary.Models
         public double Protein { private get; set; }
         public double Fat { private get; set; }
         public double Carbs { private get; set; }
-        public virtual List<Unit> Units { get; set; }
-
-
+        
         public double GetCalories(Unit unit)
         {
             return Calories * unit.Multiplier;
