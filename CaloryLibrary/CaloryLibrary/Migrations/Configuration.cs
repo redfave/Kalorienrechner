@@ -57,7 +57,6 @@
                   Carbs = 35,
                   Fat = 4.9,
                   Protein = 7.7,
-                  Units = unitsToAdd.ToList()
               },
               new Ingredient
               {
@@ -66,7 +65,6 @@
                   Carbs = 35.2,
                   Fat = 1.4,
                   Protein = 6.1,
-                  Units = unitsToAdd.ToList()
               },
               new Ingredient
               {
@@ -75,7 +73,6 @@
                   Carbs = 0.5,
                   Fat = 28,
                   Protein = 18,
-                  Units = unitsToAdd.ToList()
               },
               new Ingredient
               {
@@ -84,7 +81,6 @@
                   Carbs = 0.9,
                   Fat = 3,
                   Protein = 19,
-                  Units = unitsToAdd.ToList()
               },
               new Ingredient
               {
@@ -93,7 +89,6 @@
                   Carbs = 0.1,
                   Fat = 29,
                   Protein = 23,
-                  Units = unitsToAdd.ToList()
               },
               new Ingredient
               {
@@ -102,7 +97,6 @@
                   Carbs = 0.1,
                   Fat = 28,
                   Protein = 28,
-                  Units = unitsToAdd.ToList()
               },
               new Ingredient
               {
@@ -111,7 +105,6 @@
                   Carbs = 20,
                   Fat = 0.2,
                   Protein = 1,
-                  Units = unitsToAdd.ToList()
               },
               new Ingredient
               {
@@ -120,10 +113,24 @@
                   Carbs = 14.4,
                   Fat = 0.1,
                   Protein = 0.3,
-                  Units = unitsToAdd.ToList()
               }
             );
             context.SaveChanges();
+
+            foreach(var ingredient in context.Ingredients)
+            {
+                foreach(var unit in unitsToAdd)
+                context.IngredientUnitRelations.AddOrUpdate
+                    (
+                        new IngredientUnitRelation
+                        {
+                            Ingredient = ingredient,
+                            Unit = unit,
+                        }
+                    );
+            }
+            context.SaveChanges();
+
             using (var md5 = MD5.Create())
             {
                 context.Logins.AddOrUpdate(
