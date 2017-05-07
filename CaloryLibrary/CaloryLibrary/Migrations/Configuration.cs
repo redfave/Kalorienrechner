@@ -48,9 +48,9 @@
                 );
             context.SaveChanges();
 
-            context.Ingredients.AddOrUpdate(
-              p => p.Name,
-              new Ingredient
+            Ingredient[] ingredientsToAdd = new[]
+            {
+                new Ingredient
               {
                   Name = "Mehrkornbrot",
                   Calories = 229,
@@ -114,21 +114,31 @@
                   Fat = 0.1,
                   Protein = 0.3,
               }
+            };
+
+            context.Ingredients.AddOrUpdate(
+              p => p.Name,
+              ingredientsToAdd
             );
             context.SaveChanges();
 
-            foreach(var ingredient in context.Ingredients)
+            List<IngredientUnitRelation> ingredientUnitRelationsToAdd = new List<IngredientUnitRelation>();
+            foreach (var ingredient in ingredientsToAdd)
             {
-                foreach(var unit in unitsToAdd)
-                context.IngredientUnitRelations.AddOrUpdate
-                    (
-                        new IngredientUnitRelation
-                        {
-                            Ingredient = ingredient,
-                            Unit = unit,
-                        }
-                    );
+                foreach (var unit in unitsToAdd)
+                    ingredientUnitRelationsToAdd.Add
+                        (
+                            new IngredientUnitRelation
+                            {
+                                Ingredient = ingredient,
+                                Unit = unit,
+                            }
+                        );
             }
+            context.IngredientUnitRelations.AddOrUpdate(
+                p => p.IngredientUnitRelationId,
+                ingredientUnitRelationsToAdd.ToArray()
+            );
             context.SaveChanges();
 
             using (var md5 = MD5.Create())
