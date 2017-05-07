@@ -1,6 +1,7 @@
 ﻿
 using CaloryLibrary.Models;
 using CaloryLibrary.Repository;
+using Kalorienrechner.ViewModel.UIElements;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -22,9 +23,11 @@ namespace Kalorienrechner.ViewModel.Food
         private double _carbs;
         private Unit _ingredientUnit;
         private List<Unit> _unitList;
+        private Ingredient _itemContext;
 
-        public IngredientViewModel ()
+        public IngredientViewModel()
         {
+            SearchViewModel<Ingredient>.OnSelectedItemChanged += OnMasterSelectedItemChanged;
             UnitList = entityContext.GetAll<Unit>().ToList();
         }
 
@@ -32,12 +35,13 @@ namespace Kalorienrechner.ViewModel.Food
         {
             get
             {
-                return _name;
+                return ItemContext.Name;
             }
 
             set
             {
-                SetProperty(ref _name, value);
+                ItemContext.Name = value;
+                RaisePropertyChanged();
             }
         }
 
@@ -132,5 +136,23 @@ namespace Kalorienrechner.ViewModel.Food
                 SetProperty(ref _ingredientUnit, value);
             }
         }
+
+        private Ingredient ItemContext
+        {
+            get
+            {
+                return _itemContext;
+            }
+            set
+            {
+                SetProperty(ref _itemContext, value);
+            }
+        }
+
+        public void OnMasterSelectedItemChanged(object selectedItem)
+        {
+            ItemContext = selectedItem as Ingredient;
+        }
+
     }
 }

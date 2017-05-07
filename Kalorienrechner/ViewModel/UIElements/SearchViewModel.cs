@@ -14,15 +14,19 @@ namespace Kalorienrechner.ViewModel.UIElements
 {
     public class SearchViewModel<T> : BindableBase where T : class
     {
-        private CaloryRepository _entityContext = new CaloryRepository();
+        private CaloryRepository etityContext = new CaloryRepository();
         private bool _showOnlyFavorites;
         private string _searchString;
         private ICollectionView _resultCollection;
         private T _selectedItem;
 
+        //Source:https://web.archive.org/web/20140602140033/http://blog.danielgilbert.de/2013/12/26/simple-inter-viewmodel-communication-in-wpf/
+        public delegate void SelectedItemChangedHandler(object selectedItem);
+        public static event SelectedItemChangedHandler OnSelectedItemChanged = delegate { };
+
         public SearchViewModel()
         {
-            ResultCollection = CollectionViewSource.GetDefaultView(_entityContext.GetAll<T>());
+            ResultCollection = CollectionViewSource.GetDefaultView(etityContext.GetAll<T>());
         }
 
         public bool ShowOnlyFavorites
@@ -78,6 +82,7 @@ namespace Kalorienrechner.ViewModel.UIElements
             set
             {
                 SetProperty(ref _selectedItem, value);
+                OnSelectedItemChanged(value);
             }
         }
     }
