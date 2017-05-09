@@ -15,6 +15,7 @@
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(CaloryLibrary.DAL.CaloryContext context)
@@ -42,8 +43,7 @@
                     Multiplier = 10,
                 }
             };
-            context.Units.AddOrUpdate(
-                unitsToAdd);
+            context.Units.AddOrUpdate(unitsToAdd);
             context.SaveChanges();
 
             Ingredient[] ingredientsToAdd = new[]
@@ -113,9 +113,7 @@
                   Protein = 0.3,
               }
             };
-
-            context.Ingredients.AddOrUpdate(
-              ingredientsToAdd);
+            context.Ingredients.AddOrUpdate(ingredientsToAdd);
             context.SaveChanges();
 
             List<IngredientUnitRelation> ingredientUnitRelationsToAdd = new List<IngredientUnitRelation>();
@@ -134,11 +132,12 @@
             context.IngredientUnitRelations.AddOrUpdate(ingredientUnitRelationsToAdd.ToArray());
             context.SaveChanges();
 
+            Login[] loginsToAdd;
             using (var md5 = MD5.Create())
             {
-                context.Logins.AddOrUpdate(
-                p => p.Name,
-                new Login
+                loginsToAdd = new[]
+            {
+                                new Login
                 {
                     Name = "MTsu",
                     Password = Helper.CalculateMD5Hash("abc123"),
@@ -148,12 +147,15 @@
                     Name = "OFalkunskyy",
                     Password = Helper.CalculateMD5Hash("blyat"),
                 }
-                );
+                };
             }
 
+
+            context.Logins.AddOrUpdate(loginsToAdd);
+            context.SaveChanges();
+
             LoginIngredientRelation[] loginIngredientRelationsToAdd = new[]
-{
-                new LoginIngredientRelation
+            {                new LoginIngredientRelation
                 {
                     Login = context.Logins.Where(w => w.LoginId == 2).Single(),
                     Ingredient = context.Ingredients.Where(w => w.IngredientId == 3).Single()

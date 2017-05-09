@@ -33,7 +33,7 @@ namespace Kalorienrechner.ViewModel.UIElements
             ResultCollection = CollectionViewSource.GetDefaultView(entityContext.GetAll<QueriedType>());
             //favoritesCollection = entityContext.GetAll<QueriedTypeUserRelation>().ToList();
             //var list = favoritesCollection.Select(s => s[0]);
-            var test = entityContext.Get<LoginIngredientRelation>(filter: ).ToList();
+            var test = entityContext.Get<LoginIngredientRelation>().ToList();
             List<int> test2 = test.Select(s => s.Ingredient.IngredientId).ToList();
         }
 
