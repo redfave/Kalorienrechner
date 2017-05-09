@@ -10,11 +10,13 @@ namespace Kalorienrechner
 {
     public static class Global
     {
-        public static string CurrentUser
+        public static int CurrentUserID
         {
             get;
             set;
         }
+
+
 
         public static bool ConnectionEstablished
         {
