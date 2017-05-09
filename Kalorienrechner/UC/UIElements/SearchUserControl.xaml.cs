@@ -25,6 +25,10 @@ namespace Kalorienrechner.UC.UIElements
             DependencyProperty.Register("QueriedType", typeof(Type), typeof(SearchUserControl),
                 new UIPropertyMetadata(null));
 
+        public static readonly DependencyProperty QueriedTypeUserRelationProperty =
+    DependencyProperty.Register("QueriedTypeUserRelation", typeof(Type), typeof(SearchUserControl),
+        new UIPropertyMetadata(null));
+
 
 
         public SearchUserControl()
@@ -44,9 +48,21 @@ namespace Kalorienrechner.UC.UIElements
             }
         }
 
+        public Type QueriedTypeUserRelation
+        {
+            get
+            {
+                return GetValue(QueriedTypeUserRelationProperty) as Type;
+            }
+            set
+            {
+                SetValue(QueriedTypeUserRelationProperty, value);
+            }
+        }
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            Type searchViewModelType = typeof(SearchViewModel<>).MakeGenericType(new[] { QueriedType });
+            Type searchViewModelType = typeof(SearchViewModel<,>).MakeGenericType(new[] { QueriedType, QueriedTypeUserRelation });
             LayoutGrid.DataContext = Activator.CreateInstance(searchViewModelType);
         }
     }

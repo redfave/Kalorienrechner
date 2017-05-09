@@ -19,7 +19,8 @@
             <ColumnDefinition Width="0.4*"/>
             <ColumnDefinition Width="0.6*"/>
         </Grid.ColumnDefinitions>
-        <localUI:SearchUserControl Grid.Column="0" QueriedType="{x:Type repoModels:Ingredient}">
+        <localUI:SearchUserControl Grid.Column="0" QueriedType="{x:Type repoModels:Ingredient}"
+                                   QueriedTypeUserRelation="{x:Type repoModels:LoginIngredientRelation}">
         </localUI:SearchUserControl>
         
         <Grid Grid.Column="1">

@@ -12,13 +12,17 @@ using System.Windows.Data;
 
 namespace Kalorienrechner.ViewModel.UIElements
 {
-    public class SearchViewModel<T> : BindableBase where T : class
+    public class SearchViewModel<QueriedType, QueriedTypeUserRelation> : BindableBase
+        where QueriedType : class
+        where QueriedTypeUserRelation : class
+
     {
-        private CaloryRepository etityContext = new CaloryRepository();
+        private CaloryRepository entityContext = new CaloryRepository();
+        private List<QueriedTypeUserRelation> favoritesCollection;
         private bool _showOnlyFavorites;
         private string _searchString;
         private ICollectionView _resultCollection;
-        private T _selectedItem;
+        private QueriedType _selectedItem;
 
         //Source:https://web.archive.org/web/20140602140033/http://blog.danielgilbert.de/2013/12/26/simple-inter-viewmodel-communication-in-wpf/
         public delegate void SelectedItemChangedHandler(object selectedItem);
@@ -26,7 +30,11 @@ namespace Kalorienrechner.ViewModel.UIElements
 
         public SearchViewModel()
         {
-            ResultCollection = CollectionViewSource.GetDefaultView(etityContext.GetAll<T>());
+            ResultCollection = CollectionViewSource.GetDefaultView(entityContext.GetAll<QueriedType>());
+            //favoritesCollection = entityContext.GetAll<QueriedTypeUserRelation>().ToList();
+            //var list = favoritesCollection.Select(s => s[0]);
+            var test = entityContext.Get<LoginIngredientRelation>(filter: ).ToList();
+            List<int> test2 = test.Select(s => s.Ingredient.IngredientId).ToList();
         }
 
         public bool ShowOnlyFavorites
@@ -72,7 +80,7 @@ namespace Kalorienrechner.ViewModel.UIElements
             }
         }
 
-        public T SelectedItem
+        public QueriedType SelectedItem
         {
             get
             {
