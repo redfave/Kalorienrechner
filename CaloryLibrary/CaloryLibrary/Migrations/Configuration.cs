@@ -43,9 +43,7 @@
                 }
             };
             context.Units.AddOrUpdate(
-                p => p.Name,
-                unitsToAdd
-                );
+                unitsToAdd);
             context.SaveChanges();
 
             Ingredient[] ingredientsToAdd = new[]
@@ -117,9 +115,7 @@
             };
 
             context.Ingredients.AddOrUpdate(
-              p => p.Name,
-              ingredientsToAdd
-            );
+              ingredientsToAdd);
             context.SaveChanges();
 
             List<IngredientUnitRelation> ingredientUnitRelationsToAdd = new List<IngredientUnitRelation>();
@@ -135,10 +131,7 @@
                             }
                         );
             }
-            context.IngredientUnitRelations.AddOrUpdate(
-                p => p.IngredientUnitRelationId,
-                ingredientUnitRelationsToAdd.ToArray()
-            );
+            context.IngredientUnitRelations.AddOrUpdate(ingredientUnitRelationsToAdd.ToArray());
             context.SaveChanges();
 
             using (var md5 = MD5.Create())
@@ -158,6 +151,26 @@
                 );
             }
 
+            LoginIngredientRelation[] loginIngredientRelationsToAdd = new[]
+{
+                new LoginIngredientRelation
+                {
+                    Login = context.Logins.Where(w => w.LoginId == 2).Single(),
+                    Ingredient = context.Ingredients.Where(w => w.IngredientId == 3).Single()
+                },
+                                new LoginIngredientRelation
+                {
+                    Login = context.Logins.Where(w => w.LoginId == 2).Single(),
+                    Ingredient = context.Ingredients.Where(w => w.IngredientId == 6).Single()
+                },
+                                                new LoginIngredientRelation
+                {
+                    Login = context.Logins.Where(w => w.LoginId == 2).Single(),
+                    Ingredient = context.Ingredients.Where(w => w.IngredientId == 8).Single()
+                }
+            };
+            context.Favorites.AddOrUpdate(loginIngredientRelationsToAdd);
+            context.SaveChanges();
         }
     }
 }
