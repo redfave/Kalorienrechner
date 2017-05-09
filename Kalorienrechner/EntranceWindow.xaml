@@ -5,16 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kalorienrechner"
         xmlns:UserUc="clr-namespace:Kalorienrechner.UC.User"
-        xmlns:viewModel="clr-namespace:Kalorienrechner.ViewModel.User"
+        xmlns:viewModel="clr-namespace:Kalorienrechner.ViewModel.User" 
         mc:Ignorable="d"
         Title="Willkommen"
-        Height="170" Width="350" ResizeMode="NoResize">
+        Height="250" Width="500" ResizeMode="NoResize">
+    
     <Window.DataContext>
         <viewModel:LoginViewModel/>
     </Window.DataContext>
+    
     <TabControl>
         <TabItem Header="Login">
-            <UserUc:LoginUserControl/>
+            <UserUc:LoginUserControl />
         </TabItem>
         <TabItem Header="Registrieren">
             <UserUc:RegisterUserControl/>
