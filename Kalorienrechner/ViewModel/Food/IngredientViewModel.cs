@@ -16,7 +16,6 @@ namespace Kalorienrechner.ViewModel.Food
     {
         private CaloryRepository entityContext = new CaloryRepository();
         private int _ID;
-        private string _name;
         private double _calories;
         private double _protein;
         private double _fat;
@@ -29,6 +28,8 @@ namespace Kalorienrechner.ViewModel.Food
         {
             SearchViewModel<Ingredient>.OnSelectedItemChanged += OnMasterSelectedItemChanged;
             UnitList = entityContext.GetAll<Unit>().ToList();
+            //Prevents NullReferenceException on startup
+            ItemContext = new Ingredient();
         }
 
         public string Name
@@ -146,6 +147,8 @@ namespace Kalorienrechner.ViewModel.Food
             set
             {
                 SetProperty(ref _itemContext, value);
+                //Notifies all databinding sources
+                RaisePropertyChanged(null);
             }
         }
 

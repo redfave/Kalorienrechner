@@ -40,7 +40,8 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Grid.Column="0" Margin="10,10" Orientation="Vertical">
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Zutat"/>
-                <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Top"></TextBox>
+                <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                         Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </StackPanel>
             <StackPanel Grid.Row="0" Grid.Column="1" Margin="10,10" Orientation="Vertical">
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Einheit"/>
