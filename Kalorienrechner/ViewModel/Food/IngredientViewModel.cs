@@ -50,7 +50,7 @@ namespace Kalorienrechner.ViewModel.Food
         {
             get
             {
-                return _calories;
+                return ItemContext.Calories;
             }
 
             set
@@ -64,7 +64,7 @@ namespace Kalorienrechner.ViewModel.Food
         {
             get
             {
-                return _protein;
+               return ItemContext.Protein;
             }
 
             set
@@ -77,7 +77,7 @@ namespace Kalorienrechner.ViewModel.Food
         {
             get
             {
-                return _fat;
+                return ItemContext.Fat;
             }
 
             set
@@ -90,7 +90,7 @@ namespace Kalorienrechner.ViewModel.Food
         {
             get
             {
-                return _carbs;
+                return ItemContext.Carbs;
             }
 
             set
@@ -112,24 +112,24 @@ namespace Kalorienrechner.ViewModel.Food
             }
         }
 
-        public int ID
-        {
-            get
-            {
-                return _ID;
-            }
+        //public int ID
+        //{
+        //    get
+        //    {
+        //        return ItemContext.IngredientId;
+        //    }
 
-            private set
-            {
-                SetProperty(ref _ID, value);
-            }
-        }
+        //    private set
+        //    {
+        //        SetProperty(ref _ID, value);
+        //    }
+        //}
 
         public Unit IngredientUnit
         {
             get
             {
-                return _ingredientUnit;
+               return ItemContext.BaseUnit;
             }
 
             set

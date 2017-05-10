@@ -42,32 +42,32 @@
             <StackPanel Grid.Row="0" Grid.Column="0" Margin="10,10" Orientation="Vertical">
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Zutat"/>
                 <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                         Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                         Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Grid.Column="1" Margin="10,10" Orientation="Vertical">
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Einheit"/>
                 <ComboBox HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                          ItemsSource="{Binding Path=UnitList}"></ComboBox>
+                          ItemsSource="{Binding Path=UnitList}" SelectedItem="{Binding Path=IngredientUnit}"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="0" Margin="10,10" Orientation="Vertical">
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Kalorien"/>
                 <extended:DoubleUpDown HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                                       Minimum="0"></extended:DoubleUpDown>
+                                       Minimum="0" Value="{Binding Path=Calories, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1" Margin="10,10" Orientation="Vertical">
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Einweiß"/>
                 <extended:DoubleUpDown HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                                       Minimum="0"></extended:DoubleUpDown>
+                                       Minimum="0" Value="{Binding Path=Protein, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
             <StackPanel Grid.Row="2" Grid.Column="0" Margin="10,10" Orientation="Vertical">
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Fett"/>
                 <extended:DoubleUpDown HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                                       Minimum="0"></extended:DoubleUpDown>
+                                       Minimum="0" Value="{Binding Path=Fat, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
             <StackPanel Grid.Row="2" Grid.Column="1" Margin="10,10" Orientation="Vertical">
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Kohlenhydrate"/>
                 <extended:DoubleUpDown HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                                       Minimum="0"></extended:DoubleUpDown>
+                                       Minimum="0" Value="{Binding Path=Carbs, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
         </Grid>
     </Grid>
