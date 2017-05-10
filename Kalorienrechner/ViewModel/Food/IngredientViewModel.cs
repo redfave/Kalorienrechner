@@ -1,6 +1,7 @@
 ﻿
 using CaloryLibrary.Models;
 using CaloryLibrary.Repository;
+using Kalorienrechner.ViewModel.UIElements;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -15,29 +16,33 @@ namespace Kalorienrechner.ViewModel.Food
     {
         private CaloryRepository entityContext = new CaloryRepository();
         private int _ID;
-        private string _name;
         private double _calories;
         private double _protein;
         private double _fat;
         private double _carbs;
         private Unit _ingredientUnit;
         private List<Unit> _unitList;
+        private Ingredient _itemContext;
 
-        public IngredientViewModel ()
+        public IngredientViewModel()
         {
-            //UnitList = entityContext.GetAll<Unit>().ToList();
+            SearchViewModel<Ingredient, LoginIngredientRelation>.OnSelectedItemChanged += OnMasterSelectedItemChanged;
+            UnitList = entityContext.GetAll<Unit>().ToList();
+            //Prevents NullReferenceException on startup
+            ItemContext = new Ingredient();
         }
 
         public string Name
         {
             get
             {
-                return _name;
+                return ItemContext.Name;
             }
 
             set
             {
-                SetProperty(ref _name, value);
+                ItemContext.Name = value;
+                RaisePropertyChanged();
             }
         }
 
@@ -132,5 +137,25 @@ namespace Kalorienrechner.ViewModel.Food
                 SetProperty(ref _ingredientUnit, value);
             }
         }
+
+        private Ingredient ItemContext
+        {
+            get
+            {
+                return _itemContext;
+            }
+            set
+            {
+                SetProperty(ref _itemContext, value);
+                //Notifies all databinding sources
+                RaisePropertyChanged(null);
+            }
+        }
+
+        public void OnMasterSelectedItemChanged(object selectedItem)
+        {
+            ItemContext = selectedItem as Ingredient;
+        }
+
     }
 }

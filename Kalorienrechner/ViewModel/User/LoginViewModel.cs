@@ -96,19 +96,18 @@ namespace Kalorienrechner.ViewModel.User
             };
         }
 
-        private void ExecuteLogin(PasswordBox parameter)
+        private async void ExecuteLogin(PasswordBox parameter)
         {
             if (parameter == null)
             {
                 throw new ArgumentNullException();
             }
             IsBusy = true;
-            string hashedPassword = CaloryLibrary.Helper.CalculateMD5Hash(parameter.Password);
-            Login login = repo.GetOne<Login>(l => l.Name == UserName && l.Password == hashedPassword);
+            Login login = await QueryLoginAsync(CaloryLibrary.Helper.CalculateMD5Hash(parameter.Password));
             if (login != null)
             {
                 DisplayWrongCredentialsError = false;
-                Global.CurrentUser = UserName;
+                Global.CurrentUserID = login.LoginId;
                 MainWindow mainwindow = new MainWindow();
                 Application.Current.MainWindow.Close();
                 mainwindow.Show();
@@ -125,5 +124,13 @@ namespace Kalorienrechner.ViewModel.User
             //Called by the view when the password is changed so the login button can be enabled
             LoginCommand.RaiseCanExecuteChanged();
         }
+
+        private Task<Login> QueryLoginAsync(string hashedPassword)
+        {
+            return Task.Run(() => repo.GetOne<Login>(l => l.Name == UserName && l.Password == hashedPassword));
+        }
+
+
     }
 }
+
