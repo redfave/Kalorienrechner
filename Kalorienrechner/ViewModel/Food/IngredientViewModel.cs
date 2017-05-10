@@ -15,12 +15,6 @@ namespace Kalorienrechner.ViewModel.Food
     public class IngredientViewModel : BindableBase
     {
         private CaloryRepository entityContext = new CaloryRepository();
-        private int _ID;
-        private double _calories;
-        private double _protein;
-        private double _fat;
-        private double _carbs;
-        private Unit _ingredientUnit;
         private List<Unit> _unitList;
         private Ingredient _itemContext;
 
@@ -55,21 +49,22 @@ namespace Kalorienrechner.ViewModel.Food
 
             set
             {
-                SetProperty(ref _calories, value);
-
-            }
+                ItemContext.Calories = value;
+                RaisePropertyChanged();
+                            }
         }
 
         public double Protein
         {
             get
             {
-               return ItemContext.Protein;
+                return ItemContext.Protein;
             }
 
             set
             {
-                SetProperty(ref _protein, value);
+                ItemContext.Protein = value;
+                RaisePropertyChanged();
             }
         }
 
@@ -82,7 +77,8 @@ namespace Kalorienrechner.ViewModel.Food
 
             set
             {
-                SetProperty(ref _fat, value);
+                ItemContext.Fat = value;
+                RaisePropertyChanged();
             }
         }
 
@@ -95,7 +91,8 @@ namespace Kalorienrechner.ViewModel.Food
 
             set
             {
-                SetProperty(ref _carbs, value);
+                ItemContext.Carbs = value;
+                RaisePropertyChanged();
             }
         }
 
@@ -129,12 +126,13 @@ namespace Kalorienrechner.ViewModel.Food
         {
             get
             {
-               return ItemContext.BaseUnit;
+                return ItemContext.BaseUnit;
             }
 
             set
             {
-                SetProperty(ref _ingredientUnit, value);
+                ItemContext.BaseUnit = value;
+                RaisePropertyChanged();
             }
         }
 
