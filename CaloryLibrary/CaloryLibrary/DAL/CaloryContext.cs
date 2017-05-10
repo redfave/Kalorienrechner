@@ -24,9 +24,7 @@ namespace CaloryLibrary.DAL
         public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<Login> Logins { get; set; }
         public DbSet<Recipe> Recipes { get; set; }
-        public DbSet<IngredientUnitRelation> IngredientUnitRelations { get; set; }
         public DbSet<RecipeIngredientRelation> RecipeIngredientRelations { get; set; }
         public DbSet<LoginIngredientRelation> Favorites { get; set; }
-        public DbSet<Unit> Units { get; set; }
     }
 }

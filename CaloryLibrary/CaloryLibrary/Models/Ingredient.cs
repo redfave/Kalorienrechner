@@ -14,25 +14,6 @@ namespace CaloryLibrary.Models
         public double Protein { private get; set; }
         public double Fat { private get; set; }
         public double Carbs { private get; set; }
-        
-        public double GetCalories(Unit unit)
-        {
-            return Calories * unit.Multiplier;
-        }
-
-        public double GetProtein(Unit unit)
-        {
-            return Protein * unit.Multiplier;
-        }
-
-        public double GetFat(Unit unit)
-        {
-            return Fat * unit.Multiplier;
-        }
-
-        public double GetCarbs(Unit unit)
-        {
-            return Carbs * unit.Multiplier;
-        }       
+        public Unit BaseUnit { get; set; }
     }
 }

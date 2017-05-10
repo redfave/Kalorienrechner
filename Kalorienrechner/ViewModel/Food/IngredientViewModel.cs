@@ -25,7 +25,7 @@ namespace Kalorienrechner.ViewModel.Food
 
         public IngredientViewModel ()
         {
-            UnitList = entityContext.GetAll<Unit>().ToList();
+            //UnitList = entityContext.GetAll<Unit>().ToList();
         }
 
         public string Name

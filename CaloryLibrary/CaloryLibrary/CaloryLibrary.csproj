@@ -62,7 +62,6 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Ingredient.cs" />
     <Compile Include="Models\LoginIngredientRelation.cs" />
-    <Compile Include="Models\IngredientUnitRelation.cs" />
     <Compile Include="Models\Recipe.cs" />
     <Compile Include="Models\RecipeIngredientRelation.cs" />
     <Compile Include="Models\Login.cs" />

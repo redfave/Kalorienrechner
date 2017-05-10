@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace CaloryLibrary.Models
 {
-    public class Unit
+    public enum Unit
     {
-        public int UnitId { get; set; }
-        public string Name  { get; set; }
-        public double Multiplier { get; set; }
+        Gram,
+        Milliliter,
+
     }
 }
