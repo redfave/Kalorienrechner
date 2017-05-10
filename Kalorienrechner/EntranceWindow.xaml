@@ -10,13 +10,17 @@
         Title="Willkommen"
         Height="250" Width="500" ResizeMode="NoResize">
     
-    <Window.DataContext>
+    <!--<Window.DataContext>
         <viewModel:LoginViewModel/>
-    </Window.DataContext>
+    </Window.DataContext>-->
     
     <TabControl>
         <TabItem Header="Login">
-            <UserUc:LoginUserControl />
+            <UserUc:LoginUserControl>
+                <UserUc:LoginUserControl.DataContext>
+                    <viewModel:LoginViewModel/>
+                </UserUc:LoginUserControl.DataContext>
+            </UserUc:LoginUserControl>
         </TabItem>
         <TabItem Header="Registrieren">
             <UserUc:RegisterUserControl/>
