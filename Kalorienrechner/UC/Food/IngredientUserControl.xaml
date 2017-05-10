@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Kalorienrechner.UC.Food"
+             xmlns:enum="clr-namespace:Kalorienrechner.Helper.Enum"
              xmlns:localUI="clr-namespace:Kalorienrechner.UC.UIElements"
              xmlns:viewModel="clr-namespace:Kalorienrechner.ViewModel.Food"
              xmlns:repoModels="clr-namespace:CaloryLibrary.Models;assembly=CaloryLibrary"
@@ -20,9 +21,8 @@
             <ColumnDefinition Width="0.6*"/>
         </Grid.ColumnDefinitions>
         <localUI:SearchUserControl Grid.Column="0" QueriedType="{x:Type repoModels:Ingredient}"
-                                   QueriedTypeUserRelation="{x:Type repoModels:LoginIngredientRelation}">
-        </localUI:SearchUserControl>
-        
+                                   Favorites="{x:Static enum:FavoritesTable.Ingridient}"/>
+
         <Grid Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.5*"/>
@@ -33,7 +33,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                
+
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -47,7 +47,7 @@
             <StackPanel Grid.Row="0" Grid.Column="1" Margin="10,10" Orientation="Vertical">
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Einheit"/>
                 <ComboBox HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                          ItemsSource="{Binding Path=UnitList}" DisplayMemberPath="Name"></ComboBox>
+                          ItemsSource="{Binding Path=UnitList}"></ComboBox>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="0" Margin="10,10" Orientation="Vertical">
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Kalorien"/>

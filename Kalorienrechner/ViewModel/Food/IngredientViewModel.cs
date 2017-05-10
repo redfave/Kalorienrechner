@@ -26,8 +26,8 @@ namespace Kalorienrechner.ViewModel.Food
 
         public IngredientViewModel()
         {
-            SearchViewModel<Ingredient, LoginIngredientRelation>.OnSelectedItemChanged += OnMasterSelectedItemChanged;
-            UnitList = entityContext.GetAll<Unit>().ToList();
+            SearchViewModel<Ingredient>.OnSelectedItemChanged += OnMasterSelectedItemChanged;
+            UnitList = Enum.GetValues(typeof(Unit)).Cast<Unit>().ToList();
             //Prevents NullReferenceException on startup
             ItemContext = new Ingredient();
         }
