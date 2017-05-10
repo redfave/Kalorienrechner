@@ -115,6 +115,7 @@
     </ApplicationDefinition>
     <Compile Include="Global.cs" />
     <Compile Include="Helper\Converter\BoolToVisibilityConverter.cs" />
+    <Compile Include="Helper\Enum\FavoritesTable.cs" />
     <Compile Include="UC\Food\IngredientUserControl.xaml.cs">
       <DependentUpon>IngredientUserControl.xaml</DependentUpon>
     </Compile>

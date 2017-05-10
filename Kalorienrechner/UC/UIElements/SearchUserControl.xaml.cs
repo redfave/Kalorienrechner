@@ -1,4 +1,5 @@
-﻿using Kalorienrechner.ViewModel.UIElements;
+﻿using Kalorienrechner.Helper.Enum;
+using Kalorienrechner.ViewModel.UIElements;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,11 +26,9 @@ namespace Kalorienrechner.UC.UIElements
             DependencyProperty.Register("QueriedType", typeof(Type), typeof(SearchUserControl),
                 new UIPropertyMetadata(null));
 
-        public static readonly DependencyProperty QueriedTypeUserRelationProperty =
-    DependencyProperty.Register("QueriedTypeUserRelation", typeof(Type), typeof(SearchUserControl),
+        public static readonly DependencyProperty FavoritesProperty =
+    DependencyProperty.Register("Favorites", typeof(FavoritesTable), typeof(SearchUserControl),
         new UIPropertyMetadata(null));
-
-
 
         public SearchUserControl()
         {
@@ -48,22 +47,22 @@ namespace Kalorienrechner.UC.UIElements
             }
         }
 
-        public Type QueriedTypeUserRelation
+        public Enum Favorites
         {
             get
             {
-                return GetValue(QueriedTypeUserRelationProperty) as Type;
+                return (FavoritesTable)GetValue(FavoritesProperty);
             }
             set
             {
-                SetValue(QueriedTypeUserRelationProperty, value);
+                SetValue(FavoritesProperty, value);
             }
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            Type searchViewModelType = typeof(SearchViewModel<,>).MakeGenericType(new[] { QueriedType, QueriedTypeUserRelation });
-            LayoutGrid.DataContext = Activator.CreateInstance(searchViewModelType);
+            Type searchViewModelType = typeof(SearchViewModel<>).MakeGenericType(new[] { QueriedType });
+            LayoutGrid.DataContext = Activator.CreateInstance(searchViewModelType, new object[] { Favorites });
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using CaloryLibrary.Models;
 using CaloryLibrary.Repository;
+using Kalorienrechner.Helper.Enum;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -12,13 +13,12 @@ using System.Windows.Data;
 
 namespace Kalorienrechner.ViewModel.UIElements
 {
-    public class SearchViewModel<QueriedType, QueriedTypeUserRelation> : BindableBase
+    public class SearchViewModel<QueriedType> : BindableBase
         where QueriedType : class
-        where QueriedTypeUserRelation : class
 
     {
         private CaloryRepository entityContext = new CaloryRepository();
-        private List<QueriedTypeUserRelation> favoritesCollection;
+        private List<object> favoritesCollection;
         private bool _showOnlyFavorites;
         private string _searchString;
         private ICollectionView _resultCollection;
@@ -28,13 +28,13 @@ namespace Kalorienrechner.ViewModel.UIElements
         public delegate void SelectedItemChangedHandler(object selectedItem);
         public static event SelectedItemChangedHandler OnSelectedItemChanged = delegate { };
 
-        public SearchViewModel()
+        public SearchViewModel(FavoritesTable favEnum)
         {
+            SetFavoritesCollection(favEnum);
             ResultCollection = CollectionViewSource.GetDefaultView(entityContext.GetAll<QueriedType>());
             //favoritesCollection = entityContext.GetAll<QueriedTypeUserRelation>().ToList();
             //var list = favoritesCollection.Select(s => s[0]);
-            var test = entityContext.Get<LoginIngredientRelation>(filter: (f) => f.Login.LoginId == Global.CurrentUserID).ToList();
-            List<int> test2 = test.Select(s => s.Ingredient.IngredientId).ToList();
+
         }
 
         public bool ShowOnlyFavorites
@@ -60,11 +60,7 @@ namespace Kalorienrechner.ViewModel.UIElements
             set
             {
                 SetProperty(ref _searchString, value);
-                ResultCollection.Filter = filter =>
-                {
-                    Ingredient ingredient = filter as Ingredient;
-                    return ingredient.Name.StartsWith(value, StringComparison.CurrentCultureIgnoreCase);
-                };
+                SetCollectionFilter();
             }
         }
 
@@ -93,6 +89,42 @@ namespace Kalorienrechner.ViewModel.UIElements
                 OnSelectedItemChanged(value);
             }
         }
-    }
 
+        private void SetFavoritesCollection(FavoritesTable favEnum)
+        {
+            switch (favEnum)
+            {
+                case FavoritesTable.Ingridient:
+                    favoritesCollection = entityContext.Get<LoginIngredientRelation>(filter: (f) => f.Login.LoginId == Global.CurrentUserID).Cast<object>().ToList();
+                    break;
+                case FavoritesTable.Recipe:
+                    throw new NotImplementedException();
+                case FavoritesTable.Meal:
+                    throw new NotImplementedException();
+                default:
+                    throw new ArgumentException();
+            }
+        }
+
+        private void SetCollectionFilter()
+        {
+            if (ShowOnlyFavorites)
+            {
+                ResultCollection.Filter = filter =>
+                {
+                    Ingredient ingredient = filter as Ingredient;
+                    //TODO
+                    return ingredient.Name.StartsWith(SearchString, StringComparison.CurrentCultureIgnoreCase);
+                };
+            }
+            else
+            {
+                ResultCollection.Filter = filter =>
+                {
+                    Ingredient ingredient = filter as Ingredient;
+                    return ingredient.Name.StartsWith(SearchString, StringComparison.CurrentCultureIgnoreCase);
+                };
+            }
+        }
+    }
 }
