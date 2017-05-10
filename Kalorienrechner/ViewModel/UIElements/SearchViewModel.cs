@@ -18,7 +18,8 @@ namespace Kalorienrechner.ViewModel.UIElements
 
     {
         private CaloryRepository entityContext = new CaloryRepository();
-        private List<object> favoritesCollection;
+        private List<QueriedType> favoritesCollection;
+        private List<QueriedType> sourceCollection;
         private bool _showOnlyFavorites;
         private string _searchString;
         private ICollectionView _resultCollection;
@@ -30,11 +31,9 @@ namespace Kalorienrechner.ViewModel.UIElements
 
         public SearchViewModel(FavoritesTable favEnum)
         {
-            SetFavoritesCollection(favEnum);
-            ResultCollection = CollectionViewSource.GetDefaultView(entityContext.GetAll<QueriedType>());
-            //favoritesCollection = entityContext.GetAll<QueriedTypeUserRelation>().ToList();
-            //var list = favoritesCollection.Select(s => s[0]);
-
+            GetFavoritesCollection(favEnum);
+            sourceCollection = entityContext.GetAll<QueriedType>().ToList();
+            ResultCollection = CollectionViewSource.GetDefaultView(sourceCollection);
         }
 
         public bool ShowOnlyFavorites
@@ -47,6 +46,16 @@ namespace Kalorienrechner.ViewModel.UIElements
             set
             {
                 SetProperty(ref _showOnlyFavorites, value);
+                if (value)
+                {
+                    ResultCollection = CollectionViewSource.GetDefaultView(favoritesCollection);
+                }
+                else
+                {
+                    ResultCollection = CollectionViewSource.GetDefaultView(sourceCollection);
+                }
+                //Applies instantly the current search filter on the new collection
+                SearchString = SearchString;
             }
         }
 
@@ -60,7 +69,10 @@ namespace Kalorienrechner.ViewModel.UIElements
             set
             {
                 SetProperty(ref _searchString, value);
-                SetCollectionFilter();
+                ResultCollection.Filter = filter => {
+                    Ingredient ingredient = filter as Ingredient;
+                    return ingredient.Name.StartsWith(SearchString, StringComparison.CurrentCultureIgnoreCase);
+                };
             }
         }
 
@@ -90,40 +102,21 @@ namespace Kalorienrechner.ViewModel.UIElements
             }
         }
 
-        private void SetFavoritesCollection(FavoritesTable favEnum)
+        private void GetFavoritesCollection(FavoritesTable favEnum)
         {
             switch (favEnum)
             {
                 case FavoritesTable.Ingridient:
-                    favoritesCollection = entityContext.Get<LoginIngredientRelation>(filter: (f) => f.Login.LoginId == Global.CurrentUserID).Cast<object>().ToList();
+                    favoritesCollection = entityContext.Get<LoginIngredientRelation>(filter: (f) => f.Login.LoginId == Global.CurrentUserID).Select(s => s.Ingredient).Cast<QueriedType>().ToList();
                     break;
                 case FavoritesTable.Recipe:
                     throw new NotImplementedException();
+                    break;
                 case FavoritesTable.Meal:
                     throw new NotImplementedException();
+                    break;
                 default:
                     throw new ArgumentException();
-            }
-        }
-
-        private void SetCollectionFilter()
-        {
-            if (ShowOnlyFavorites)
-            {
-                ResultCollection.Filter = filter =>
-                {
-                    Ingredient ingredient = filter as Ingredient;
-                    //TODO
-                    return ingredient.Name.StartsWith(SearchString, StringComparison.CurrentCultureIgnoreCase);
-                };
-            }
-            else
-            {
-                ResultCollection.Filter = filter =>
-                {
-                    Ingredient ingredient = filter as Ingredient;
-                    return ingredient.Name.StartsWith(SearchString, StringComparison.CurrentCultureIgnoreCase);
-                };
             }
         }
     }
