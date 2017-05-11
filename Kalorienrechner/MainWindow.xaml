@@ -13,13 +13,14 @@
         Width="{Binding RelativeSource={RelativeSource Self}, Path=MinWidth}"
         mc:Ignorable="d">
     <TabControl>
-        <TabItem Header="Rezepte">
-        </TabItem>
         <TabItem Header="Zutaten">
             <food:IngredientUserControl />
         </TabItem>
+        <TabItem Header="Rezepte">
+        </TabItem>
+        <TabItem Header="Mahlzeiten"></TabItem>
         <TabItem Header="Mein Account">
-            <UserUc:SetNewPasswordUserControl />
+            <UserUc:SetNewPasswordUserControl/>
         </TabItem>
     </TabControl>
 </Window>
