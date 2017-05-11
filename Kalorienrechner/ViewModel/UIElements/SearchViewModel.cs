@@ -71,7 +71,8 @@ namespace Kalorienrechner.ViewModel.UIElements
             set
             {
                 SetProperty(ref _searchString, value);
-                ResultCollection.Filter = filter => {
+                ResultCollection.Filter = filter =>
+                {
                     Ingredient ingredient = filter as Ingredient;
                     return ingredient.Name.StartsWith(SearchString, StringComparison.CurrentCultureIgnoreCase);
                 };
@@ -100,7 +101,11 @@ namespace Kalorienrechner.ViewModel.UIElements
             set
             {
                 SetProperty(ref _selectedItem, value);
-                OnSelectedItemChanged(value);
+                //Prevents NullReferenceException if no item selected
+                if (value != null)
+                {
+                    OnSelectedItemChanged(value);
+                }
             }
         }
 
