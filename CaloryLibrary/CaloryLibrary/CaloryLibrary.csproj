@@ -60,6 +60,7 @@
     <Compile Include="Helper.cs" />
     <Compile Include="DAL\CaloryContext.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\DiaryEntry.cs" />
     <Compile Include="Models\Ingredient.cs" />
     <Compile Include="Models\LoginIngredientRelation.cs" />
     <Compile Include="Models\Recipe.cs" />
