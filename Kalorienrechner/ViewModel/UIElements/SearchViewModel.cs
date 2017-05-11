@@ -20,6 +20,7 @@ namespace Kalorienrechner.ViewModel.UIElements
         private CaloryRepository entityContext = new CaloryRepository();
         private List<QueriedType> favoritesCollection;
         private List<QueriedType> sourceCollection;
+        private FavoritesTable favoriteRelationTable;
         private bool _showOnlyFavorites;
         private string _searchString;
         private ICollectionView _resultCollection;
@@ -31,11 +32,8 @@ namespace Kalorienrechner.ViewModel.UIElements
 
         public SearchViewModel(FavoritesTable favEnum)
         {
-            GetFavoritesCollection(favEnum);
-            sourceCollection = entityContext.GetAll<QueriedType>().ToList();
-            ResultCollection = CollectionViewSource.GetDefaultView(sourceCollection);
-            //Prevents NullReferenceException if the user's first interaction is to show favorite entries
-            SearchString = "";
+            favoriteRelationTable = favEnum;
+            Reload();
         }
 
         public bool ShowOnlyFavorites
@@ -109,9 +107,9 @@ namespace Kalorienrechner.ViewModel.UIElements
             }
         }
 
-        private void GetFavoritesCollection(FavoritesTable favEnum)
+        private void GetFavoritesCollection()
         {
-            switch (favEnum)
+            switch (favoriteRelationTable)
             {
                 case FavoritesTable.Ingridient:
                     favoritesCollection = entityContext.Get<LoginIngredientRelation>(filter: (f) => f.Login.LoginId == Global.CurrentUserID).Select(s => s.Ingredient).Cast<QueriedType>().ToList();
@@ -125,6 +123,15 @@ namespace Kalorienrechner.ViewModel.UIElements
                 default:
                     throw new ArgumentException();
             }
+        }
+
+        private void Reload()
+        {
+            GetFavoritesCollection();
+            sourceCollection = entityContext.GetAll<QueriedType>().ToList();
+            ResultCollection = CollectionViewSource.GetDefaultView(sourceCollection);
+            //Prevents NullReferenceException if the user's first interaction is to show favorite entries
+            SearchString = "";
         }
     }
 }
