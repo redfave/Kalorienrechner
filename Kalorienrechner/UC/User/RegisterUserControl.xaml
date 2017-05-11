@@ -1,37 +1,107 @@
 ﻿<UserControl x:Class="Kalorienrechner.UC.User.RegisterUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewModel="clr-namespace:Kalorienrechner.ViewModel.User"
+             xmlns:converter="clr-namespace:Kalorienrechner.Helper.Converter"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:extended="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:local="clr-namespace:Kalorienrechner.UC.User"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="600">
-    <Grid IsEnabled="False">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0.3*"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="0.05*"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="0.05*"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="0.05*"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="0.3*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.2*"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="0.1*"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="0.2*"/>
-        </Grid.ColumnDefinitions>
-        <TextBlock Grid.Column="1" Grid.Row="1" Text="User:"></TextBlock>
-        <TextBox Grid.Column="3" Grid.Row="1" Width="200"></TextBox>
-        <TextBlock Grid.Column="1" Grid.Row="3" Text="Passwort:"></TextBlock>
-        <TextBox Grid.Column="3" Grid.Row="3" Width="200"></TextBox>
-        <TextBlock Grid.Column="1" Grid.Row="5" Text="Passwort wiederholen:"></TextBlock>
-        <TextBox Grid.Column="3" Grid.Row="5" Width="200"></TextBox>
-        <Button Grid.Column="3" Grid.Row="8" Content="Registrieren"></Button>
-    </Grid>
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             d:DesignHeight="300"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <converter:BoolToVisibilityConverter x:Key="boolToVisibilityConverter" />
+        <converter:PasswordBoxMultiConverter x:Key="passwordBoxMultiConverter"/>
+    </UserControl.Resources>
+    <extended:BusyIndicator IsBusy="{Binding Path=IsBusy, UpdateSourceTrigger=PropertyChanged}" BusyContent="Bitte warten">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.3*" />
+                <ColumnDefinition Width="0.7*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0"
+                   Grid.Column="0"
+                   Margin="10,40,0,0"
+                   Text="User:" />
+            <TextBox Name="textBoxLogin"
+                 Grid.Row="0"
+                 Grid.Column="1"
+                 Margin="0,40,10,0"
+                 VerticalAlignment="Bottom"
+                 Text="{Binding Path=UserName,
+                                UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock Grid.Row="2"
+                   Grid.Column="0"
+                   Margin="10,10,0,0"
+                   Text="Passwort:" />
+            <PasswordBox Name="passwordBox1"
+                     Grid.Row="2"
+                     Grid.Column="1"
+                     Margin="0,10,10,0"
+                     VerticalAlignment="Bottom">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PasswordChanged">
+                        <ei:CallMethodAction MethodName="RaiseRegisterCommandCanExecuteChanged" TargetObject="{Binding}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </PasswordBox>
+            <PasswordBox Name="passwordBox2"
+                     Grid.Row="3"
+                     Grid.Column="1"
+                     Margin="0,10,10,0"
+                     VerticalAlignment="Bottom">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PasswordChanged">
+                        <ei:CallMethodAction MethodName="RaiseRegisterCommandCanExecuteChanged" TargetObject="{Binding}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </PasswordBox>
+            <TextBlock Grid.Row="3"
+                   Grid.Column="0"
+                   Margin="10,10,0,0"
+                   Text="Passwort wiederholen:" />
+            <TextBlock Grid.Row="4"
+                   Grid.Column="1"
+                   Margin="0,10,10,0"
+                   HorizontalAlignment="Center"
+                   Foreground="Red"
+                   Text="Die Passwörter stimmen nicht überein"
+                   Visibility="{Binding Path=DisplayWrongCredentialsError,
+                                        Converter={StaticResource boolToVisibilityConverter},
+                                        UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Grid.Row="5"
+                   Grid.Column="1"
+                   Margin="0,10,10,0"
+                   HorizontalAlignment="Center"
+                   Foreground="Green"
+                   Text="Benutzeraccount angelegt"
+                   Visibility="{Binding Path=DisplaySuccessfulRegistrationNotification,
+                                        Converter={StaticResource boolToVisibilityConverter},
+                                        UpdateSourceTrigger=PropertyChanged}" />
+            <Button Grid.Row="6"
+                Grid.Column="1"
+                Margin="0,10,10,0"
+                Content="Registrieren" Command="{Binding Path=RegisterCommand}">
+                <Button.CommandParameter>
+                    <MultiBinding Converter="{StaticResource passwordBoxMultiConverter}">
+                        <Binding ElementName="passwordBox1"/>
+                        <Binding ElementName="passwordBox2"/>
+                    </MultiBinding>
+                </Button.CommandParameter>
+            </Button>
+        </Grid>
+    </extended:BusyIndicator>
 </UserControl>

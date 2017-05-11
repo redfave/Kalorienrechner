@@ -2,28 +2,34 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kalorienrechner"
-        xmlns:UserUc="clr-namespace:Kalorienrechner.UC.User"
-        xmlns:viewModel="clr-namespace:Kalorienrechner.ViewModel.User" 
-        mc:Ignorable="d"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:useruc="clr-namespace:Kalorienrechner.UC.User"
+        xmlns:viewModel="clr-namespace:Kalorienrechner.ViewModel.User"
         Title="Willkommen"
-        Height="250" Width="500" ResizeMode="NoResize">
-    
+        Width="500"
+        Height="270"
+        ResizeMode="NoResize"
+        mc:Ignorable="d">
+
     <!--<Window.DataContext>
         <viewModel:LoginViewModel/>
     </Window.DataContext>-->
-    
+
     <TabControl>
         <TabItem Header="Login">
-            <UserUc:LoginUserControl>
-                <UserUc:LoginUserControl.DataContext>
-                    <viewModel:LoginViewModel/>
-                </UserUc:LoginUserControl.DataContext>
-            </UserUc:LoginUserControl>
+            <useruc:LoginUserControl>
+                <useruc:LoginUserControl.DataContext>
+                    <viewModel:LoginViewModel />
+                </useruc:LoginUserControl.DataContext>
+            </useruc:LoginUserControl>
         </TabItem>
         <TabItem Header="Registrieren">
-            <UserUc:RegisterUserControl/>
+            <useruc:RegisterUserControl>
+                <useruc:RegisterUserControl.DataContext>
+                    <viewModel:RegisterViewModel />
+                </useruc:RegisterUserControl.DataContext>
+            </useruc:RegisterUserControl>
         </TabItem>
     </TabControl>
 </Window>

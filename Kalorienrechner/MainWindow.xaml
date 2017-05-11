@@ -19,7 +19,7 @@
             <RowDefinition Height="0.1*"/>
             <RowDefinition Height="0.9*"/>
         </Grid.RowDefinitions>
-        <uielements:UserBar HorizontalAlignment="Right"></uielements:UserBar>
+        <uielements:UserBar Margin="0,0,10,0" HorizontalAlignment="Right"></uielements:UserBar>
         <TabControl Grid.Row="1">
             <TabItem Header="Zutaten">
                 <food:IngredientUserControl />
