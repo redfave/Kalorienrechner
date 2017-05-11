@@ -34,6 +34,8 @@ namespace Kalorienrechner.ViewModel.UIElements
             GetFavoritesCollection(favEnum);
             sourceCollection = entityContext.GetAll<QueriedType>().ToList();
             ResultCollection = CollectionViewSource.GetDefaultView(sourceCollection);
+            //Prevents NullReferenceException if the user's first interaction is to show favorite entries
+            SearchString = "";
         }
 
         public bool ShowOnlyFavorites
