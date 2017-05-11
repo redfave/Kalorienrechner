@@ -109,8 +109,8 @@ namespace Kalorienrechner.ViewModel.User
                 DisplayWrongCredentialsError = false;
                 Global.CurrentUserID = login.LoginId;
                 MainWindow mainwindow = new MainWindow();
-                Application.Current.MainWindow.Close();
                 mainwindow.Show();
+                Application.Current.MainWindow.Close();
             }
             else
             {

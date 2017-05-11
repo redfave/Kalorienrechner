@@ -113,6 +113,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AboutWindow.xaml.cs">
+      <DependentUpon>AboutWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Global.cs" />
     <Compile Include="Helper\Converter\BoolToVisibilityConverter.cs" />
     <Compile Include="Helper\Enum\FavoritesTable.cs" />
@@ -125,6 +128,9 @@
     <Compile Include="UC\UIElements\SearchUserControl.xaml.cs">
       <DependentUpon>SearchUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UC\UIElements\UserBar.xaml.cs">
+      <DependentUpon>UserBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UC\User\LoginUserControl.xaml.cs">
       <DependentUpon>LoginUserControl.xaml</DependentUpon>
     </Compile>
@@ -136,7 +142,12 @@
     </Compile>
     <Compile Include="ViewModel\Food\IngredientViewModel.cs" />
     <Compile Include="ViewModel\UIElements\SearchViewModel.cs" />
+    <Compile Include="ViewModel\UIElements\UserBarViewModel.cs" />
     <Compile Include="ViewModel\User\LoginViewModel.cs" />
+    <Page Include="AboutWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EntranceWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -165,6 +176,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UC\UIElements\SearchUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UC\UIElements\UserBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -209,12 +224,17 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\logout.png" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CaloryLibrary\CaloryLibrary\CaloryLibrary.csproj">
       <Project>{98DD8B4C-6DFA-4718-B4AC-A3023D6E5870}</Project>
       <Name>CaloryLibrary</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\information-in-circular-button.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

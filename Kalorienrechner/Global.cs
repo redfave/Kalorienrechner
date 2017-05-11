@@ -10,7 +10,7 @@ namespace Kalorienrechner
 {
     public static class Global
     {
-        public static int CurrentUserID
+        public static int? CurrentUserID
         {
             get;
             set;

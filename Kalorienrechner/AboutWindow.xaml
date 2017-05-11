@@ -1,0 +1,30 @@
+﻿<Window x:Class="Kalorienrechner.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Kalorienrechner"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="Über"
+        Width="300"
+        Height="150"
+        ResizeMode="NoResize"
+        mc:Ignorable="d">
+    <StackPanel Margin="0,10,0,0" Orientation="Vertical">
+        <TextBlock HorizontalAlignment="Center" Text="Kalorienrechner entwickelt von" />
+        <TextBlock HorizontalAlignment="Center">
+            <Run Foreground="Red" Text="Merlin" />
+            <Run Foreground="Green" Text="Tsu" />
+        </TextBlock>
+        <TextBlock HorizontalAlignment="Center" Text="Olexiy Falkunskyy" />
+        <TextBlock Margin="0,10,0,0" HorizontalAlignment="Center">
+            <Run Text="Icons made by" />
+            <Hyperlink NavigateUri="http://www.flaticon.com/authors/freepik">Freepik</Hyperlink>
+            <Run Text="from" />
+            <Hyperlink NavigateUri="http://www.flaticon.com/">www.flaticon.com</Hyperlink>
+        </TextBlock>
+
+
+
+
+    </StackPanel>
+</Window>
