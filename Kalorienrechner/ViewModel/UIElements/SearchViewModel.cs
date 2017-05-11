@@ -69,11 +69,7 @@ namespace Kalorienrechner.ViewModel.UIElements
             set
             {
                 SetProperty(ref _searchString, value);
-                ResultCollection.Filter = filter =>
-                {
-                    Ingredient ingredient = filter as Ingredient;
-                    return ingredient.Name.StartsWith(SearchString, StringComparison.CurrentCultureIgnoreCase);
-                };
+                SetSearchFilter();
             }
         }
 
@@ -113,6 +109,30 @@ namespace Kalorienrechner.ViewModel.UIElements
             {
                 case FavoritesTable.Ingridient:
                     favoritesCollection = entityContext.Get<LoginIngredientRelation>(filter: (f) => f.Login.LoginId == Global.CurrentUserID).Select(s => s.Ingredient).Cast<QueriedType>().ToList();
+                    break;
+                case FavoritesTable.Recipe:
+                    throw new NotImplementedException();
+                    break;
+                case FavoritesTable.Meal:
+                    throw new NotImplementedException();
+                    break;
+                default:
+                    throw new ArgumentException();
+            }
+        }
+
+        private void SetSearchFilter()
+        {
+            switch (favoriteRelationTable)
+            {
+                case FavoritesTable.Ingridient:
+                    {
+                        ResultCollection.Filter = filter =>
+                        {
+                            Ingredient ingredient = filter as Ingredient;
+                            return ingredient.Name.StartsWith(SearchString, StringComparison.CurrentCultureIgnoreCase);
+                        };
+                    }
                     break;
                 case FavoritesTable.Recipe:
                     throw new NotImplementedException();
