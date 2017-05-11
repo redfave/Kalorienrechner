@@ -116,6 +116,15 @@
                   Fat = 0.2,
                   Protein = 0.7,
                   BaseUnit = Unit.Milliliter,
+              },
+              new Ingredient
+              {
+                  Name = "Ananas",
+                  Calories = 59,
+                  Carbs = 12.4,
+                  Fat = 0.2,
+                  Protein = 0.5,
+                  BaseUnit = Unit.Gram,
               }
             };
 
