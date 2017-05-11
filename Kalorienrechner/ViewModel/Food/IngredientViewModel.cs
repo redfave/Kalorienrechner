@@ -17,6 +17,7 @@ namespace Kalorienrechner.ViewModel.Food
         private CaloryRepository entityContext = new CaloryRepository();
         private List<Unit> _unitList;
         private Ingredient _itemContext;
+        private bool _isFavorite;
 
         public IngredientViewModel()
         {
@@ -51,7 +52,7 @@ namespace Kalorienrechner.ViewModel.Food
             {
                 ItemContext.Calories = value;
                 RaisePropertyChanged();
-                            }
+            }
         }
 
         public double Protein
@@ -109,19 +110,6 @@ namespace Kalorienrechner.ViewModel.Food
             }
         }
 
-        //public int ID
-        //{
-        //    get
-        //    {
-        //        return ItemContext.IngredientId;
-        //    }
-
-        //    private set
-        //    {
-        //        SetProperty(ref _ID, value);
-        //    }
-        //}
-
         public Unit IngredientUnit
         {
             get
@@ -133,6 +121,18 @@ namespace Kalorienrechner.ViewModel.Food
             {
                 ItemContext.BaseUnit = value;
                 RaisePropertyChanged();
+            }
+        }
+
+        public bool IsFavorite
+        {
+            get
+            {
+                return _isFavorite;
+            }
+            set
+            {
+                SetProperty(ref _isFavorite, value);
             }
         }
 
@@ -150,10 +150,25 @@ namespace Kalorienrechner.ViewModel.Food
             }
         }
 
-        public void OnMasterSelectedItemChanged(object selectedItem)
+
+        private void OnMasterSelectedItemChanged(object selectedItem)
         {
             ItemContext = selectedItem as Ingredient;
+            QueryIsFavorite();
         }
 
+        private void QueryIsFavorite()
+        {
+            LoginIngredientRelation loginIngredientRelation = entityContext.GetOne<LoginIngredientRelation>(filter: (f) =>
+            f.Login.LoginId == Global.CurrentUserID && f.Ingredient.IngredientId == ItemContext.IngredientId);
+            if (loginIngredientRelation != null)
+            {
+                IsFavorite = true;
+            }
+            else
+            {
+                IsFavorite = false;
+            }
+        }
     }
 }
