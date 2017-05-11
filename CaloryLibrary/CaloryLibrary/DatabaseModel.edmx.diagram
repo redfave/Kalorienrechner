@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e55efe20bc6445f581fff85bbd500a69" Name="Diagram1">
+        <EntityTypeShape EntityType="calorycalculatorModel.C__migrationhistory" Width="1.5" PointX="8.875" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="calorycalculatorModel.ingredients" Width="1.5" PointX="5.25" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="calorycalculatorModel.loginingredientrelations" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="calorycalculatorModel.logins" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="calorycalculatorModel.recipeingredientrelations" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="calorycalculatorModel.recipes" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="calorycalculatorModel.FK_5262b771de1743da92175463903d669d" ManuallyRouted="false" />
+        <AssociationConnector Association="calorycalculatorModel.FK_c87a1295234441a4abf8c54fa328a455" ManuallyRouted="false" />
+        <AssociationConnector Association="calorycalculatorModel.FK_LoginIngredientRelations_Logins_Login_LoginId" ManuallyRouted="false" />
+        <AssociationConnector Association="calorycalculatorModel.FK_Recipes_Logins_Creator_LoginId" ManuallyRouted="false" />
+        <AssociationConnector Association="calorycalculatorModel.FK_RecipeIngredientRelations_Recipes_Recipe_RecipeId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
