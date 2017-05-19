@@ -11,7 +11,7 @@ namespace CaloryLibrary.DAL
 {
     public class CaloryContext : DbContext
     {
-        public CaloryContext() : base ("CaloryContext")
+        public CaloryContext() : base("CaloryContext")
         {
 
         }
@@ -21,10 +21,13 @@ namespace CaloryLibrary.DAL
             base.OnModelCreating(modelBuilder);
         }
 
+        public DbSet<DiaryEntry> DiaryEntries { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
+        public DbSet<IngredientEntry> IngredientEntries { get; set; }
         public DbSet<Login> Logins { get; set; }
-        public DbSet<Recipe> Recipes { get; set; }
-        public DbSet<RecipeIngredientRelation> RecipeIngredientRelations { get; set; }
         public DbSet<LoginIngredientRelation> Favorites { get; set; }
+        public DbSet<Recipe> Recipes { get; set; }
+        public DbSet<RecipeEntry> RecipeEntries { get; set; }
+        public DbSet<RecipeIngredientRelation> RecipeIngredientRelations { get; set; }
     }
 }

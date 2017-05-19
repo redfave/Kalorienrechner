@@ -91,6 +91,9 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DiaryEntry.cs" />
     <Compile Include="Models\Ingredient.cs" />
+    <Compile Include="Models\Mealtime.cs" />
+    <Compile Include="Models\RecipeEntry.cs" />
+    <Compile Include="Models\IngredientEntry.cs" />
     <Compile Include="Models\LoginIngredientRelation.cs" />
     <Compile Include="Models\Recipe.cs" />
     <Compile Include="Models\RecipeIngredientRelation.cs" />

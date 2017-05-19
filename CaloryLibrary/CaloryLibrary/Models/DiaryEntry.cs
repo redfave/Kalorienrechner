@@ -9,11 +9,9 @@ namespace CaloryLibrary.Models
     public class DiaryEntry
     {
         public int DiaryEntryId { get; set; }
-        public double Amount { get; set; }
-        public DateTime Date { get; set; }
-
+        public Mealtime Mealtime { get; set; }
         public virtual Login Creator { get; set; }
-        public virtual Ingredient Ingredient { get; set; }
-        public virtual Recipe Recipe { get; set; }
+        public virtual List<IngredientEntry> IngredientEntries { get; set; }
+        public virtual List<RecipeEntry> RecipeEntries { get; set; }
     }
 }
