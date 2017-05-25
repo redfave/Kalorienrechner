@@ -108,10 +108,10 @@ namespace Kalorienrechner.ViewModel.UIElements
             switch (favoriteRelationTable)
             {
                 case FavoritesTable.Ingridient:
-                    favoritesCollection = entityContext.Get<LoginIngredientRelation>(filter: (f) => f.Login.LoginId == Global.CurrentUserID).Select(s => s.Ingredient).Cast<QueriedType>().ToList();
+                    favoritesCollection = entityContext.Get<LoginIngredientRelation>(filter: f => f.Login.LoginId == Global.CurrentUserID).Select(s => s.Ingredient).Cast<QueriedType>().ToList();
                     break;
                 case FavoritesTable.Recipe:
-                    throw new NotImplementedException();
+                    favoritesCollection = entityContext.Get<RecipeIngredientRelation>(filter: f => f.Recipe.Creator.LoginId == Global.CurrentUserID).Select(s => s.Recipe).Distinct().Cast<QueriedType>().ToList();
                     break;
                 case FavoritesTable.Meal:
                     throw new NotImplementedException();
@@ -135,7 +135,13 @@ namespace Kalorienrechner.ViewModel.UIElements
                     }
                     break;
                 case FavoritesTable.Recipe:
-                    throw new NotImplementedException();
+                    {
+                        ResultCollection.Filter = filter =>
+                        {
+                            Recipe recipe = filter as Recipe;
+                            return recipe.Name.StartsWith(SearchString, StringComparison.CurrentCultureIgnoreCase);
+                        };
+                    }
                     break;
                 case FavoritesTable.Meal:
                     throw new NotImplementedException();
