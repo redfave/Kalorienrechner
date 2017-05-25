@@ -14,6 +14,24 @@
           <Property Name="Model" Type="longblob" Nullable="false" />
           <Property Name="ProductVersion" Type="varchar" MaxLength="32" Nullable="false" />
         </EntityType>
+        <EntityType Name="diaryentries">
+          <Key>
+            <PropertyRef Name="DiaryEntryId" />
+          </Key>
+          <Property Name="DiaryEntryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Mealtime" Type="int" Nullable="false" />
+          <Property Name="Creator_LoginId" Type="int" />
+        </EntityType>
+        <EntityType Name="ingrediententries">
+          <Key>
+            <PropertyRef Name="IngredientEntryId" />
+          </Key>
+          <Property Name="IngredientEntryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="Amount" Type="double" Nullable="false" />
+          <Property Name="DiaryEntry_DiaryEntryId" Type="int" />
+          <Property Name="Ingredient_IngredientId" Type="int" />
+        </EntityType>
         <EntityType Name="ingredients">
           <Key>
             <PropertyRef Name="IngredientId" />
@@ -42,6 +60,16 @@
           <Property Name="Name" Type="longtext" />
           <Property Name="Password" Type="longtext" />
         </EntityType>
+        <EntityType Name="recipeentries">
+          <Key>
+            <PropertyRef Name="RecipeEntryId" />
+          </Key>
+          <Property Name="RecipeEntryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="Amount" Type="double" Nullable="false" />
+          <Property Name="DiaryEntry_DiaryEntryId" Type="int" />
+          <Property Name="Recipe_RecipeId" Type="int" />
+        </EntityType>
         <EntityType Name="recipeingredientrelations">
           <Key>
             <PropertyRef Name="RecipeIngredientRelationId" />
@@ -58,7 +86,19 @@
           <Property Name="Name" Type="longtext" />
           <Property Name="Creator_LoginId" Type="int" />
         </EntityType>
-        <Association Name="FK_5262b771de1743da92175463903d669d">
+        <Association Name="FK_28982caa1e7f4ed0a2a21c63c7ab58a5">
+          <End Role="diaryentries" Type="Self.diaryentries" Multiplicity="0..1" />
+          <End Role="ingrediententries" Type="Self.ingrediententries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="diaryentries">
+              <PropertyRef Name="DiaryEntryId" />
+            </Principal>
+            <Dependent Role="ingrediententries">
+              <PropertyRef Name="DiaryEntry_DiaryEntryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_2f53bc47e6f04d2189ef62d575a53bb8">
           <End Role="ingredients" Type="Self.ingredients" Multiplicity="0..1" />
           <End Role="loginingredientrelations" Type="Self.loginingredientrelations" Multiplicity="*" />
           <ReferentialConstraint>
@@ -70,7 +110,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_c87a1295234441a4abf8c54fa328a455">
+        <Association Name="FK_8486dfc432154aa8a9236446bf85ebc5">
           <End Role="ingredients" Type="Self.ingredients" Multiplicity="0..1" />
           <End Role="recipeingredientrelations" Type="Self.recipeingredientrelations" Multiplicity="*" />
           <ReferentialConstraint>
@@ -78,6 +118,30 @@
               <PropertyRef Name="IngredientId" />
             </Principal>
             <Dependent Role="recipeingredientrelations">
+              <PropertyRef Name="Ingredient_IngredientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiaryEntries_Logins_Creator_LoginId">
+          <End Role="logins" Type="Self.logins" Multiplicity="0..1" />
+          <End Role="diaryentries" Type="Self.diaryentries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="logins">
+              <PropertyRef Name="LoginId" />
+            </Principal>
+            <Dependent Role="diaryentries">
+              <PropertyRef Name="Creator_LoginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IngredientEntries_Ingredients_Ingredient_IngredientId">
+          <End Role="ingredients" Type="Self.ingredients" Multiplicity="0..1" />
+          <End Role="ingrediententries" Type="Self.ingrediententries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ingredients">
+              <PropertyRef Name="IngredientId" />
+            </Principal>
+            <Dependent Role="ingrediententries">
               <PropertyRef Name="Ingredient_IngredientId" />
             </Dependent>
           </ReferentialConstraint>
@@ -91,6 +155,30 @@
             </Principal>
             <Dependent Role="loginingredientrelations">
               <PropertyRef Name="Login_LoginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecipeEntries_DiaryEntries_DiaryEntry_DiaryEntryId">
+          <End Role="diaryentries" Type="Self.diaryentries" Multiplicity="0..1" />
+          <End Role="recipeentries" Type="Self.recipeentries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="diaryentries">
+              <PropertyRef Name="DiaryEntryId" />
+            </Principal>
+            <Dependent Role="recipeentries">
+              <PropertyRef Name="DiaryEntry_DiaryEntryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecipeEntries_Recipes_Recipe_RecipeId">
+          <End Role="recipes" Type="Self.recipes" Multiplicity="0..1" />
+          <End Role="recipeentries" Type="Self.recipeentries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="recipes">
+              <PropertyRef Name="RecipeId" />
+            </Principal>
+            <Dependent Role="recipeentries">
+              <PropertyRef Name="Recipe_RecipeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -120,22 +208,45 @@
         </Association>
         <EntityContainer Name="calorycalculatorModelStoreContainer">
           <EntitySet Name="__migrationhistory" EntityType="Self.__migrationhistory" Schema="calorycalculator" store:Type="Tables" />
+          <EntitySet Name="diaryentries" EntityType="Self.diaryentries" Schema="calorycalculator" store:Type="Tables" />
+          <EntitySet Name="ingrediententries" EntityType="Self.ingrediententries" Schema="calorycalculator" store:Type="Tables" />
           <EntitySet Name="ingredients" EntityType="Self.ingredients" Schema="calorycalculator" store:Type="Tables" />
           <EntitySet Name="loginingredientrelations" EntityType="Self.loginingredientrelations" Schema="calorycalculator" store:Type="Tables" />
           <EntitySet Name="logins" EntityType="Self.logins" Schema="calorycalculator" store:Type="Tables" />
+          <EntitySet Name="recipeentries" EntityType="Self.recipeentries" Schema="calorycalculator" store:Type="Tables" />
           <EntitySet Name="recipeingredientrelations" EntityType="Self.recipeingredientrelations" Schema="calorycalculator" store:Type="Tables" />
           <EntitySet Name="recipes" EntityType="Self.recipes" Schema="calorycalculator" store:Type="Tables" />
-          <AssociationSet Name="FK_5262b771de1743da92175463903d669d" Association="Self.FK_5262b771de1743da92175463903d669d">
+          <AssociationSet Name="FK_28982caa1e7f4ed0a2a21c63c7ab58a5" Association="Self.FK_28982caa1e7f4ed0a2a21c63c7ab58a5">
+            <End Role="diaryentries" EntitySet="diaryentries" />
+            <End Role="ingrediententries" EntitySet="ingrediententries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_2f53bc47e6f04d2189ef62d575a53bb8" Association="Self.FK_2f53bc47e6f04d2189ef62d575a53bb8">
             <End Role="ingredients" EntitySet="ingredients" />
             <End Role="loginingredientrelations" EntitySet="loginingredientrelations" />
           </AssociationSet>
-          <AssociationSet Name="FK_c87a1295234441a4abf8c54fa328a455" Association="Self.FK_c87a1295234441a4abf8c54fa328a455">
+          <AssociationSet Name="FK_8486dfc432154aa8a9236446bf85ebc5" Association="Self.FK_8486dfc432154aa8a9236446bf85ebc5">
             <End Role="ingredients" EntitySet="ingredients" />
             <End Role="recipeingredientrelations" EntitySet="recipeingredientrelations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiaryEntries_Logins_Creator_LoginId" Association="Self.FK_DiaryEntries_Logins_Creator_LoginId">
+            <End Role="logins" EntitySet="logins" />
+            <End Role="diaryentries" EntitySet="diaryentries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IngredientEntries_Ingredients_Ingredient_IngredientId" Association="Self.FK_IngredientEntries_Ingredients_Ingredient_IngredientId">
+            <End Role="ingredients" EntitySet="ingredients" />
+            <End Role="ingrediententries" EntitySet="ingrediententries" />
           </AssociationSet>
           <AssociationSet Name="FK_LoginIngredientRelations_Logins_Login_LoginId" Association="Self.FK_LoginIngredientRelations_Logins_Login_LoginId">
             <End Role="logins" EntitySet="logins" />
             <End Role="loginingredientrelations" EntitySet="loginingredientrelations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecipeEntries_DiaryEntries_DiaryEntry_DiaryEntryId" Association="Self.FK_RecipeEntries_DiaryEntries_DiaryEntry_DiaryEntryId">
+            <End Role="diaryentries" EntitySet="diaryentries" />
+            <End Role="recipeentries" EntitySet="recipeentries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecipeEntries_Recipes_Recipe_RecipeId" Association="Self.FK_RecipeEntries_Recipes_Recipe_RecipeId">
+            <End Role="recipes" EntitySet="recipes" />
+            <End Role="recipeentries" EntitySet="recipeentries" />
           </AssociationSet>
           <AssociationSet Name="FK_RecipeIngredientRelations_Recipes_Recipe_RecipeId" Association="Self.FK_RecipeIngredientRelations_Recipes_Recipe_RecipeId">
             <End Role="recipes" EntitySet="recipes" />
@@ -160,6 +271,29 @@
           <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
+        <EntityType Name="diaryentries">
+          <Key>
+            <PropertyRef Name="DiaryEntryId" />
+          </Key>
+          <Property Name="DiaryEntryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Mealtime" Type="Int32" Nullable="false" />
+          <Property Name="Creator_LoginId" Type="Int32" />
+          <NavigationProperty Name="ingrediententries" Relationship="Self.FK_28982caa1e7f4ed0a2a21c63c7ab58a5" FromRole="diaryentries" ToRole="ingrediententries" />
+          <NavigationProperty Name="logins" Relationship="Self.FK_DiaryEntries_Logins_Creator_LoginId" FromRole="diaryentries" ToRole="logins" />
+          <NavigationProperty Name="recipeentries" Relationship="Self.FK_RecipeEntries_DiaryEntries_DiaryEntry_DiaryEntryId" FromRole="diaryentries" ToRole="recipeentries" />
+        </EntityType>
+        <EntityType Name="ingrediententries">
+          <Key>
+            <PropertyRef Name="IngredientEntryId" />
+          </Key>
+          <Property Name="IngredientEntryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="DiaryEntry_DiaryEntryId" Type="Int32" />
+          <Property Name="Ingredient_IngredientId" Type="Int32" />
+          <NavigationProperty Name="diaryentries" Relationship="Self.FK_28982caa1e7f4ed0a2a21c63c7ab58a5" FromRole="ingrediententries" ToRole="diaryentries" />
+          <NavigationProperty Name="ingredients" Relationship="Self.FK_IngredientEntries_Ingredients_Ingredient_IngredientId" FromRole="ingrediententries" ToRole="ingredients" />
+        </EntityType>
         <EntityType Name="ingredients">
           <Key>
             <PropertyRef Name="IngredientId" />
@@ -171,8 +305,9 @@
           <Property Name="Fat" Type="Double" Nullable="false" />
           <Property Name="Carbs" Type="Double" Nullable="false" />
           <Property Name="BaseUnit" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="loginingredientrelations" Relationship="Self.FK_5262b771de1743da92175463903d669d" FromRole="ingredients" ToRole="loginingredientrelations" />
-          <NavigationProperty Name="recipeingredientrelations" Relationship="Self.FK_c87a1295234441a4abf8c54fa328a455" FromRole="ingredients" ToRole="recipeingredientrelations" />
+          <NavigationProperty Name="ingrediententries" Relationship="Self.FK_IngredientEntries_Ingredients_Ingredient_IngredientId" FromRole="ingredients" ToRole="ingrediententries" />
+          <NavigationProperty Name="loginingredientrelations" Relationship="Self.FK_2f53bc47e6f04d2189ef62d575a53bb8" FromRole="ingredients" ToRole="loginingredientrelations" />
+          <NavigationProperty Name="recipeingredientrelations" Relationship="Self.FK_8486dfc432154aa8a9236446bf85ebc5" FromRole="ingredients" ToRole="recipeingredientrelations" />
         </EntityType>
         <EntityType Name="loginingredientrelations">
           <Key>
@@ -181,7 +316,7 @@
           <Property Name="LoginIngredientRelationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Ingredient_IngredientId" Type="Int32" />
           <Property Name="Login_LoginId" Type="Int32" />
-          <NavigationProperty Name="ingredients" Relationship="Self.FK_5262b771de1743da92175463903d669d" FromRole="loginingredientrelations" ToRole="ingredients" />
+          <NavigationProperty Name="ingredients" Relationship="Self.FK_2f53bc47e6f04d2189ef62d575a53bb8" FromRole="loginingredientrelations" ToRole="ingredients" />
           <NavigationProperty Name="logins" Relationship="Self.FK_LoginIngredientRelations_Logins_Login_LoginId" FromRole="loginingredientrelations" ToRole="logins" />
         </EntityType>
         <EntityType Name="logins">
@@ -191,8 +326,21 @@
           <Property Name="LoginId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="diaryentries" Relationship="Self.FK_DiaryEntries_Logins_Creator_LoginId" FromRole="logins" ToRole="diaryentries" />
           <NavigationProperty Name="loginingredientrelations" Relationship="Self.FK_LoginIngredientRelations_Logins_Login_LoginId" FromRole="logins" ToRole="loginingredientrelations" />
           <NavigationProperty Name="recipes" Relationship="Self.FK_Recipes_Logins_Creator_LoginId" FromRole="logins" ToRole="recipes" />
+        </EntityType>
+        <EntityType Name="recipeentries">
+          <Key>
+            <PropertyRef Name="RecipeEntryId" />
+          </Key>
+          <Property Name="RecipeEntryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="DiaryEntry_DiaryEntryId" Type="Int32" />
+          <Property Name="Recipe_RecipeId" Type="Int32" />
+          <NavigationProperty Name="diaryentries" Relationship="Self.FK_RecipeEntries_DiaryEntries_DiaryEntry_DiaryEntryId" FromRole="recipeentries" ToRole="diaryentries" />
+          <NavigationProperty Name="recipes" Relationship="Self.FK_RecipeEntries_Recipes_Recipe_RecipeId" FromRole="recipeentries" ToRole="recipes" />
         </EntityType>
         <EntityType Name="recipeingredientrelations">
           <Key>
@@ -201,7 +349,7 @@
           <Property Name="RecipeIngredientRelationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Ingredient_IngredientId" Type="Int32" />
           <Property Name="Recipe_RecipeId" Type="Int32" />
-          <NavigationProperty Name="ingredients" Relationship="Self.FK_c87a1295234441a4abf8c54fa328a455" FromRole="recipeingredientrelations" ToRole="ingredients" />
+          <NavigationProperty Name="ingredients" Relationship="Self.FK_8486dfc432154aa8a9236446bf85ebc5" FromRole="recipeingredientrelations" ToRole="ingredients" />
           <NavigationProperty Name="recipes" Relationship="Self.FK_RecipeIngredientRelations_Recipes_Recipe_RecipeId" FromRole="recipeingredientrelations" ToRole="recipes" />
         </EntityType>
         <EntityType Name="recipes">
@@ -212,9 +360,58 @@
           <Property Name="Name" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
           <Property Name="Creator_LoginId" Type="Int32" />
           <NavigationProperty Name="logins" Relationship="Self.FK_Recipes_Logins_Creator_LoginId" FromRole="recipes" ToRole="logins" />
+          <NavigationProperty Name="recipeentries" Relationship="Self.FK_RecipeEntries_Recipes_Recipe_RecipeId" FromRole="recipes" ToRole="recipeentries" />
           <NavigationProperty Name="recipeingredientrelations" Relationship="Self.FK_RecipeIngredientRelations_Recipes_Recipe_RecipeId" FromRole="recipes" ToRole="recipeingredientrelations" />
         </EntityType>
-        <Association Name="FK_5262b771de1743da92175463903d669d">
+        <Association Name="FK_28982caa1e7f4ed0a2a21c63c7ab58a5">
+          <End Role="diaryentries" Type="Self.diaryentries" Multiplicity="0..1" />
+          <End Role="ingrediententries" Type="Self.ingrediententries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="diaryentries">
+              <PropertyRef Name="DiaryEntryId" />
+            </Principal>
+            <Dependent Role="ingrediententries">
+              <PropertyRef Name="DiaryEntry_DiaryEntryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiaryEntries_Logins_Creator_LoginId">
+          <End Role="logins" Type="Self.logins" Multiplicity="0..1" />
+          <End Role="diaryentries" Type="Self.diaryentries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="logins">
+              <PropertyRef Name="LoginId" />
+            </Principal>
+            <Dependent Role="diaryentries">
+              <PropertyRef Name="Creator_LoginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecipeEntries_DiaryEntries_DiaryEntry_DiaryEntryId">
+          <End Role="diaryentries" Type="Self.diaryentries" Multiplicity="0..1" />
+          <End Role="recipeentries" Type="Self.recipeentries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="diaryentries">
+              <PropertyRef Name="DiaryEntryId" />
+            </Principal>
+            <Dependent Role="recipeentries">
+              <PropertyRef Name="DiaryEntry_DiaryEntryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IngredientEntries_Ingredients_Ingredient_IngredientId">
+          <End Role="ingredients" Type="Self.ingredients" Multiplicity="0..1" />
+          <End Role="ingrediententries" Type="Self.ingrediententries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ingredients">
+              <PropertyRef Name="IngredientId" />
+            </Principal>
+            <Dependent Role="ingrediententries">
+              <PropertyRef Name="Ingredient_IngredientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_2f53bc47e6f04d2189ef62d575a53bb8">
           <End Role="ingredients" Type="Self.ingredients" Multiplicity="0..1" />
           <End Role="loginingredientrelations" Type="Self.loginingredientrelations" Multiplicity="*" />
           <ReferentialConstraint>
@@ -226,7 +423,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_c87a1295234441a4abf8c54fa328a455">
+        <Association Name="FK_8486dfc432154aa8a9236446bf85ebc5">
           <End Role="ingredients" Type="Self.ingredients" Multiplicity="0..1" />
           <End Role="recipeingredientrelations" Type="Self.recipeingredientrelations" Multiplicity="*" />
           <ReferentialConstraint>
@@ -262,6 +459,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_RecipeEntries_Recipes_Recipe_RecipeId">
+          <End Role="recipes" Type="Self.recipes" Multiplicity="0..1" />
+          <End Role="recipeentries" Type="Self.recipeentries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="recipes">
+              <PropertyRef Name="RecipeId" />
+            </Principal>
+            <Dependent Role="recipeentries">
+              <PropertyRef Name="Recipe_RecipeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_RecipeIngredientRelations_Recipes_Recipe_RecipeId">
           <End Role="recipes" Type="Self.recipes" Multiplicity="0..1" />
           <End Role="recipeingredientrelations" Type="Self.recipeingredientrelations" Multiplicity="*" />
@@ -274,18 +483,37 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="calorycalculatorEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DatabaseModel" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__migrationhistory" EntityType="Self.C__migrationhistory" />
+          <EntitySet Name="diaryentries" EntityType="Self.diaryentries" />
+          <EntitySet Name="ingrediententries" EntityType="Self.ingrediententries" />
           <EntitySet Name="ingredients" EntityType="Self.ingredients" />
           <EntitySet Name="loginingredientrelations" EntityType="Self.loginingredientrelations" />
           <EntitySet Name="logins" EntityType="Self.logins" />
+          <EntitySet Name="recipeentries" EntityType="Self.recipeentries" />
           <EntitySet Name="recipeingredientrelations" EntityType="Self.recipeingredientrelations" />
           <EntitySet Name="recipes" EntityType="Self.recipes" />
-          <AssociationSet Name="FK_5262b771de1743da92175463903d669d" Association="Self.FK_5262b771de1743da92175463903d669d">
+          <AssociationSet Name="FK_28982caa1e7f4ed0a2a21c63c7ab58a5" Association="Self.FK_28982caa1e7f4ed0a2a21c63c7ab58a5">
+            <End Role="diaryentries" EntitySet="diaryentries" />
+            <End Role="ingrediententries" EntitySet="ingrediententries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiaryEntries_Logins_Creator_LoginId" Association="Self.FK_DiaryEntries_Logins_Creator_LoginId">
+            <End Role="logins" EntitySet="logins" />
+            <End Role="diaryentries" EntitySet="diaryentries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecipeEntries_DiaryEntries_DiaryEntry_DiaryEntryId" Association="Self.FK_RecipeEntries_DiaryEntries_DiaryEntry_DiaryEntryId">
+            <End Role="diaryentries" EntitySet="diaryentries" />
+            <End Role="recipeentries" EntitySet="recipeentries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IngredientEntries_Ingredients_Ingredient_IngredientId" Association="Self.FK_IngredientEntries_Ingredients_Ingredient_IngredientId">
+            <End Role="ingredients" EntitySet="ingredients" />
+            <End Role="ingrediententries" EntitySet="ingrediententries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_2f53bc47e6f04d2189ef62d575a53bb8" Association="Self.FK_2f53bc47e6f04d2189ef62d575a53bb8">
             <End Role="ingredients" EntitySet="ingredients" />
             <End Role="loginingredientrelations" EntitySet="loginingredientrelations" />
           </AssociationSet>
-          <AssociationSet Name="FK_c87a1295234441a4abf8c54fa328a455" Association="Self.FK_c87a1295234441a4abf8c54fa328a455">
+          <AssociationSet Name="FK_8486dfc432154aa8a9236446bf85ebc5" Association="Self.FK_8486dfc432154aa8a9236446bf85ebc5">
             <End Role="ingredients" EntitySet="ingredients" />
             <End Role="recipeingredientrelations" EntitySet="recipeingredientrelations" />
           </AssociationSet>
@@ -297,6 +525,10 @@
             <End Role="logins" EntitySet="logins" />
             <End Role="recipes" EntitySet="recipes" />
           </AssociationSet>
+          <AssociationSet Name="FK_RecipeEntries_Recipes_Recipe_RecipeId" Association="Self.FK_RecipeEntries_Recipes_Recipe_RecipeId">
+            <End Role="recipes" EntitySet="recipes" />
+            <End Role="recipeentries" EntitySet="recipeentries" />
+          </AssociationSet>
           <AssociationSet Name="FK_RecipeIngredientRelations_Recipes_Recipe_RecipeId" Association="Self.FK_RecipeIngredientRelations_Recipes_Recipe_RecipeId">
             <End Role="recipes" EntitySet="recipes" />
             <End Role="recipeingredientrelations" EntitySet="recipeingredientrelations" />
@@ -307,7 +539,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="calorycalculatorModelStoreContainer" CdmEntityContainer="calorycalculatorEntities">
+        <EntityContainerMapping StorageEntityContainer="calorycalculatorModelStoreContainer" CdmEntityContainer="DatabaseModel">
           <EntitySetMapping Name="C__migrationhistory">
             <EntityTypeMapping TypeName="calorycalculatorModel.C__migrationhistory">
               <MappingFragment StoreEntitySet="__migrationhistory">
@@ -315,6 +547,26 @@
                 <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
                 <ScalarProperty Name="Model" ColumnName="Model" />
                 <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="diaryentries">
+            <EntityTypeMapping TypeName="calorycalculatorModel.diaryentries">
+              <MappingFragment StoreEntitySet="diaryentries">
+                <ScalarProperty Name="DiaryEntryId" ColumnName="DiaryEntryId" />
+                <ScalarProperty Name="Mealtime" ColumnName="Mealtime" />
+                <ScalarProperty Name="Creator_LoginId" ColumnName="Creator_LoginId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ingrediententries">
+            <EntityTypeMapping TypeName="calorycalculatorModel.ingrediententries">
+              <MappingFragment StoreEntitySet="ingrediententries">
+                <ScalarProperty Name="IngredientEntryId" ColumnName="IngredientEntryId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="DiaryEntry_DiaryEntryId" ColumnName="DiaryEntry_DiaryEntryId" />
+                <ScalarProperty Name="Ingredient_IngredientId" ColumnName="Ingredient_IngredientId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -346,6 +598,17 @@
                 <ScalarProperty Name="LoginId" ColumnName="LoginId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="recipeentries">
+            <EntityTypeMapping TypeName="calorycalculatorModel.recipeentries">
+              <MappingFragment StoreEntitySet="recipeentries">
+                <ScalarProperty Name="RecipeEntryId" ColumnName="RecipeEntryId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="DiaryEntry_DiaryEntryId" ColumnName="DiaryEntry_DiaryEntryId" />
+                <ScalarProperty Name="Recipe_RecipeId" ColumnName="Recipe_RecipeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -384,7 +647,7 @@
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Kein" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

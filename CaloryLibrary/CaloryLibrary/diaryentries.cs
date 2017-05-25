@@ -12,29 +12,23 @@ namespace CaloryLibrary
     using System;
     using System.Collections.Generic;
     
-    public partial class ingredients
+    public partial class diaryentries
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ingredients()
+        public diaryentries()
         {
             this.ingrediententries = new HashSet<ingrediententries>();
-            this.loginingredientrelations = new HashSet<loginingredientrelations>();
-            this.recipeingredientrelations = new HashSet<recipeingredientrelations>();
+            this.recipeentries = new HashSet<recipeentries>();
         }
     
-        public int IngredientId { get; set; }
-        public string Name { get; set; }
-        public double Calories { get; set; }
-        public double Protein { get; set; }
-        public double Fat { get; set; }
-        public double Carbs { get; set; }
-        public int BaseUnit { get; set; }
+        public int DiaryEntryId { get; set; }
+        public int Mealtime { get; set; }
+        public Nullable<int> Creator_LoginId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ingrediententries> ingrediententries { get; set; }
+        public virtual logins logins { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<loginingredientrelations> loginingredientrelations { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<recipeingredientrelations> recipeingredientrelations { get; set; }
+        public virtual ICollection<recipeentries> recipeentries { get; set; }
     }
 }

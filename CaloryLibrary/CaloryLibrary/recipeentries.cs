@@ -12,11 +12,15 @@ namespace CaloryLibrary
     using System;
     using System.Collections.Generic;
     
-    public partial class C__migrationhistory
+    public partial class recipeentries
     {
-        public string MigrationId { get; set; }
-        public string ContextKey { get; set; }
-        public byte[] Model { get; set; }
-        public string ProductVersion { get; set; }
+        public int RecipeEntryId { get; set; }
+        public System.DateTime Date { get; set; }
+        public double Amount { get; set; }
+        public Nullable<int> DiaryEntry_DiaryEntryId { get; set; }
+        public Nullable<int> Recipe_RecipeId { get; set; }
+    
+        public virtual diaryentries diaryentries { get; set; }
+        public virtual recipes recipes { get; set; }
     }
 }
