@@ -145,6 +145,7 @@ namespace Kalorienrechner.ViewModel.Food
             set
             {
                 SetProperty(ref _itemContext, value);
+                QueryIsFavorite();
                 //Notifies all databinding sources
                 RaisePropertyChanged(null);
             }
@@ -154,7 +155,6 @@ namespace Kalorienrechner.ViewModel.Food
         private void OnMasterSelectedItemChanged(object selectedItem)
         {
             ItemContext = selectedItem as Ingredient;
-            QueryIsFavorite();
         }
 
         private void QueryIsFavorite()

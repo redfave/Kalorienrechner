@@ -21,6 +21,7 @@
             <ColumnDefinition Width="0.4*"/>
             <ColumnDefinition Width="0.6*"/>
         </Grid.ColumnDefinitions>
+        
         <localUI:SearchUserControl Grid.Column="0" QueriedType="{x:Type repoModels:Ingredient}"
                                    Favorites="{x:Static enum:FavoritesTable.Ingridient}"/>
 
