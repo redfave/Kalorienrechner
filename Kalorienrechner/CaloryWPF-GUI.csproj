@@ -142,6 +142,7 @@
       <DependentUpon>SetNewPasswordUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\Food\IngredientViewModel.cs" />
+    <Compile Include="ViewModel\Food\RecipeViewModel.cs" />
     <Compile Include="ViewModel\UIElements\SearchViewModel.cs" />
     <Compile Include="ViewModel\UIElements\UserBarViewModel.cs" />
     <Compile Include="ViewModel\User\LoginViewModel.cs" />

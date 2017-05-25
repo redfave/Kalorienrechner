@@ -25,6 +25,7 @@
                 <food:IngredientUserControl />
             </TabItem>
             <TabItem Header="Rezepte">
+                <food:RecipeUserControl/>
             </TabItem>
             <TabItem Header="Mahlzeiten"></TabItem>
             <TabItem Header="Mein Account">

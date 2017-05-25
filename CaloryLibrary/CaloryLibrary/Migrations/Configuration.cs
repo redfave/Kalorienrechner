@@ -125,6 +125,15 @@
                   Fat = 0.2,
                   Protein = 0.5,
                   BaseUnit = Unit.Gram,
+              },
+              new Ingredient
+              {
+                  Name = "Hühnerei",
+                  Calories= 137,
+                  Carbs = 1.5,
+                  Fat = 9.3,
+                  Protein = 11.9,
+                  BaseUnit = Unit.Gram
               }
             };
 
@@ -170,6 +179,55 @@
                 }
             };
             context.Favorites.AddOrUpdate(loginIngredientRelationsToAdd);
+            context.SaveChanges();
+
+            Recipe[] recipesToAdd = new[]
+            {
+                new Recipe
+                {
+                    Name = "Wurstbrot",
+                    Creator = context.Logins.Where(w => w.LoginId == 1).Single()
+                },
+                                new Recipe
+                {
+                    Name = "Rührei",
+                    Creator = context.Logins.Where(w => w.LoginId == 2).Single()
+                }
+            };
+            context.Recipes.AddOrUpdate(recipesToAdd);
+            context.SaveChanges();
+
+            RecipeIngredientRelation[] recipeIngredientRelationtoAdd = new[]
+            {
+                //Wurstbrot
+                new RecipeIngredientRelation
+                {
+                    Recipe = context.Recipes.Where(w => w.RecipeId == 1).Single(),
+                    Ingredient = context.Ingredients.Where(w => w.IngredientId == 1).Single()
+                                    },
+                 new RecipeIngredientRelation
+                {
+                    Recipe = context.Recipes.Where(w => w.RecipeId == 1).Single(),
+                    Ingredient = context.Ingredients.Where(w => w.IngredientId == 4).Single()
+                                    },
+                //Rührei
+                  new RecipeIngredientRelation
+                {
+                    Recipe = context.Recipes.Where(w => w.RecipeId == 2).Single(),
+                    Ingredient = context.Ingredients.Where(w => w.IngredientId == 12).Single()
+                                    },
+                  new RecipeIngredientRelation
+                {
+                    Recipe = context.Recipes.Where(w => w.RecipeId == 2).Single(),
+                    Ingredient = context.Ingredients.Where(w => w.IngredientId == 9).Single()
+                                    },
+                   new RecipeIngredientRelation
+                {
+                    Recipe = context.Recipes.Where(w => w.RecipeId == 2).Single(),
+                    Ingredient = context.Ingredients.Where(w => w.IngredientId == 4).Single()
+                                    }
+            };
+            context.RecipeIngredientRelations.AddOrUpdate(recipeIngredientRelationtoAdd);
             context.SaveChanges();
         }
     }

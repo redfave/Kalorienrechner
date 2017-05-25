@@ -1,12 +1,62 @@
 ﻿<UserControl x:Class="Kalorienrechner.UC.Food.RecipeUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:enum="clr-namespace:Kalorienrechner.Helper.Enum"
              xmlns:local="clr-namespace:Kalorienrechner.UC.Food"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="600">
+             xmlns:localUI="clr-namespace:Kalorienrechner.UC.UIElements"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:repoModels="clr-namespace:CaloryLibrary.Models;assembly=CaloryLibrary"
+             xmlns:viewModel="clr-namespace:Kalorienrechner.ViewModel.Food"
+             d:DesignHeight="300"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+
+    <UserControl.DataContext>
+        <viewModel:RecipeViewModel />
+    </UserControl.DataContext>
+
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.4*" />
+            <ColumnDefinition Width="0.6*" />
+        </Grid.ColumnDefinitions>
+
+        <localUI:SearchUserControl Grid.Column="0"
+                                   Favorites="{x:Static enum:FavoritesTable.Recipe}"
+                                   QueriedType="{x:Type repoModels:Recipe}" />
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0"
+                        Margin="10,10"
+                        Orientation="Vertical">
+                <TextBlock HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Text="Rezept" />
+                <TextBox HorizontalAlignment="Stretch"
+                         VerticalAlignment="Top"
+                         Text="{Binding Path=Name,
+                                        UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+
+            <TextBlock Grid.Row="1"
+                       Margin="10,10"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       DockPanel.Dock="Top"
+                       Text="Zutaten" />
+            <ListView Grid.Row="1"
+                      MinHeight="150"
+                      Margin="10,10"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      DisplayMemberPath="Name"
+                      ItemsSource="{Binding Path=RecipeIngredients}" />
+        </Grid>
     </Grid>
 </UserControl>
