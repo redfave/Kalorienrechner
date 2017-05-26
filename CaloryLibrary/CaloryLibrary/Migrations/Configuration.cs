@@ -211,20 +211,23 @@
                     Ingredient = context.Ingredients.Where(w => w.IngredientId == 4).Single()
                                     },
                 //Rührei
-                  new RecipeIngredientRelation
+                new RecipeIngredientRelation
                 {
                     Recipe = context.Recipes.Where(w => w.RecipeId == 2).Single(),
-                    Ingredient = context.Ingredients.Where(w => w.IngredientId == 12).Single()
+                    Ingredient = context.Ingredients.Where(w => w.IngredientId == 12).Single(),
+                    Amount = 0.6
                                     },
                   new RecipeIngredientRelation
                 {
                     Recipe = context.Recipes.Where(w => w.RecipeId == 2).Single(),
-                    Ingredient = context.Ingredients.Where(w => w.IngredientId == 9).Single()
+                    Ingredient = context.Ingredients.Where(w => w.IngredientId == 9).Single(),
+                    Amount = 0.3
                                     },
                    new RecipeIngredientRelation
                 {
                     Recipe = context.Recipes.Where(w => w.RecipeId == 2).Single(),
-                    Ingredient = context.Ingredients.Where(w => w.IngredientId == 4).Single()
+                    Ingredient = context.Ingredients.Where(w => w.IngredientId == 4).Single(),
+                    Amount = 0.3
                                     }
             };
             context.RecipeIngredientRelations.AddOrUpdate(recipeIngredientRelationtoAdd);

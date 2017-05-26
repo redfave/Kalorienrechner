@@ -4,22 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="930c9d435683435da6f5e5f4d63bff68" Name="Diagram1" ZoomLevel="96">
-        <EntityTypeShape EntityType="calorycalculatorModel.C__migrationhistory" Width="1.5" PointX="9.375" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="calorycalculatorModel.diaryentries" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="calorycalculatorModel.ingrediententries" Width="1.5" PointX="4.875" PointY="2.625" IsExpanded="true" />
+      <Diagram DiagramId="1593785d8f5c4ce7b25fdaf9d40f7a5b" Name="Diagram1">
+        <EntityTypeShape EntityType="calorycalculatorModel.C__migrationhistory" Width="1.5" PointX="5.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="calorycalculatorModel.diaryentries" Width="1.5" PointX="6.875" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="calorycalculatorModel.ingrediententries" Width="1.5" PointX="11.25" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="calorycalculatorModel.ingredients" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="calorycalculatorModel.loginingredientrelations" Width="1.5" PointX="6.875" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="calorycalculatorModel.logins" Width="1.5" PointX="7.875" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="calorycalculatorModel.recipeentries" Width="1.5" PointX="5.75" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="calorycalculatorModel.recipeingredientrelations" Width="1.5" PointX="1" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="calorycalculatorModel.recipes" Width="1.5" PointX="3.25" PointY="7.875" IsExpanded="true" />
-        <AssociationConnector Association="calorycalculatorModel.FK_28982caa1e7f4ed0a2a21c63c7ab58a5" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="calorycalculatorModel.loginingredientrelations" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="calorycalculatorModel.logins" Width="1.5" PointX="3.625" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="calorycalculatorModel.recipeentries" Width="1.5" PointX="8.875" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="calorycalculatorModel.recipeingredientrelations" Width="1.5" PointX="1.875" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="calorycalculatorModel.recipes" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
+        <AssociationConnector Association="calorycalculatorModel.FK_d99667eb797e4a2f9a8cba6d4abbf3c6" ManuallyRouted="false" />
         <AssociationConnector Association="calorycalculatorModel.FK_DiaryEntries_Logins_Creator_LoginId" ManuallyRouted="false" />
         <AssociationConnector Association="calorycalculatorModel.FK_RecipeEntries_DiaryEntries_DiaryEntry_DiaryEntryId" ManuallyRouted="false" />
         <AssociationConnector Association="calorycalculatorModel.FK_IngredientEntries_Ingredients_Ingredient_IngredientId" ManuallyRouted="false" />
-        <AssociationConnector Association="calorycalculatorModel.FK_2f53bc47e6f04d2189ef62d575a53bb8" ManuallyRouted="false" />
-        <AssociationConnector Association="calorycalculatorModel.FK_8486dfc432154aa8a9236446bf85ebc5" ManuallyRouted="false" />
+        <AssociationConnector Association="calorycalculatorModel.FK_318e7a6bd68a46dc9d54b10c9a689eca" ManuallyRouted="false" />
+        <AssociationConnector Association="calorycalculatorModel.FK_bc6dec80ae614a85bb33d9fb29e7840a" ManuallyRouted="false" />
         <AssociationConnector Association="calorycalculatorModel.FK_LoginIngredientRelations_Logins_Login_LoginId" ManuallyRouted="false" />
         <AssociationConnector Association="calorycalculatorModel.FK_Recipes_Logins_Creator_LoginId" ManuallyRouted="false" />
         <AssociationConnector Association="calorycalculatorModel.FK_RecipeEntries_Recipes_Recipe_RecipeId" ManuallyRouted="false" />
